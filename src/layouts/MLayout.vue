@@ -1,11 +1,11 @@
 <template>
-  <div id="q-app">
-    <router-view />
+  <div>
+    <router-view/>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'App'
+  name: 'MLayout.vue'
 }
 </script>

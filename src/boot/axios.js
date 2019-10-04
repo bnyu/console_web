@@ -1,0 +1,33 @@
+import Vue from 'vue'
+import axios from 'axios'
+
+const axiosInstance = axios.create({
+  baseURL: process.env.API_BASE_URL,
+  timeout: 6000
+})
+
+Vue.prototype.$axios = axiosInstance
+
+// axios.interceptors.request.use(
+//   config => {
+//     return config
+//   },
+//   error => {
+//     return Promise.reject(error)
+//   }
+// )
+
+axiosInstance.interceptors.response.use(
+  response => {
+    if (response.status === 200 && response.data) {
+      return response.data
+    } else {
+      return Promise.reject(new Error(response.statusText || 'error request'))
+    }
+  },
+  error => {
+    return Promise.reject(error)
+  }
+)
+
+export { axiosInstance }

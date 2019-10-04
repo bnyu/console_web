@@ -1,0 +1,81 @@
+<template>
+    <q-page>
+      Dashboard<br>
+      Dashboard<br>
+      Dashboard<br>
+      Dashboard<br>
+      Dashboard<br>
+      Dashboard<br>
+      Dashboard<br>
+      Dashboard<br>
+      Dashboard<br>
+      Dashboard<br>
+      Dashboard<br>
+      Dashboard<br>
+      Dashboard<br>
+      Dashboard<br>
+      Dashboard<br>
+      Dashboard<br>
+      Dashboard<br>
+      Dashboard<br>
+      Dashboard<br>
+      Dashboard<br>
+      Dashboard<br>
+      Dashboard<br>
+      Dashboard<br>
+      Dashboard<br>
+      Dashboard<br>
+      Dashboard<br>
+      Dashboard<br>
+      Dashboard<br>
+      Dashboard<br>
+      Dashboard<br>
+      Dashboard<br>
+      Dashboard<br>
+      Dashboard<br>
+      Dashboard<br>
+      Dashboard<br>
+      Dashboard<br>
+      Dashboard<br>
+      Dashboard<br>
+      Dashboard<br>
+      Dashboard<br>
+      Dashboard<br>
+      Dashboard<br>
+      Dashboard<br>
+      Dashboard<br>
+      Dashboard<br>
+      Dashboard<br>
+      Dashboard<br>
+      Dashboard<br>
+      Dashboard<br>
+      Dashboard<br>
+      Dashboard<br>
+      Dashboard<br>
+      Dashboard<br>
+      Dashboard<br>
+      Dashboard<br>
+      Dashboard<br>
+      Dashboard<br>
+      Dashboard<br>
+      Dashboard<br>
+      Dashboard<br>
+      Dashboard<br>
+      Dashboard<br>
+      Dashboard<br>
+      Dashboard<br>
+      Dashboard<br>
+      Dashboard<br>
+      Dashboard<br>
+    </q-page>
+</template>
+
+<script>
+export default {
+  name: 'Dashboard'
+}
+</script>
+
+<style scoped>
+
+</style>
