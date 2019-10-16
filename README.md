@@ -1,26 +1,29 @@
 # console_web
 
-console_web
-
-## Install the dependencies
-```bash
-yarn
+## Project setup
+```
+yarn install
 ```
 
-### Start the app in development mode (hot-code reloading, error reporting, etc.)
-```bash
-quasar dev
+### Compiles and hot-reloads for development
+```
+yarn run serve
 ```
 
-### Lint the files
-```bash
+### Compiles and minifies for production
+```
+yarn run build
+```
+
+### Run your tests
+```
+yarn run test
+```
+
+### Lints and fixes files
+```
 yarn run lint
 ```
 
-### Build the app for production
-```bash
-quasar build
-```
-
-### Customize the configuration
-See [Configuring quasar.conf.js](https://quasar.dev/quasar-cli/quasar-conf-js).
+### Customize configuration
+See [Configuration Reference](https://cli.vuejs.org/config/).

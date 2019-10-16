@@ -5,17 +5,9 @@ import user from './modules/user.js'
 
 Vue.use(Vuex)
 
-/*
- * If not building with SSR mode, you can
- * directly export the Store instantiation
- */
-
 export default new Vuex.Store({
   modules: {
     user
   },
-
-  // enable strict mode (adds overhead!)
-  // for dev mode only
-  strict: process.env.DEV
+  strict: process.env.NODE_ENV !== 'production'
 })

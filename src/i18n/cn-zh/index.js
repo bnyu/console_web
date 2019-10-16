@@ -1,7 +1,7 @@
-import zh from 'quasar/lang/zh-hans'
+import elementCnLocale from 'element-ui/lib/locale/lang/zh-CN'// element-ui lang
 
 export default {
-  ...zh,
+  ...elementCnLocale,
   app: {
     title: '控制台',
     menu: {
@@ -21,6 +21,8 @@ export default {
       configFunction: '功能',
       configAddress: '地址'
     },
+    login:'登录',
+    logout:'登出',
     err404: '抱歉, 无法浏览此页',
     back: '返回',
     failed: '操作失败',

@@ -1,7 +1,9 @@
-import ja from 'quasar/lang/ja'
+import elementJpLocale from 'element-ui/lib/locale/lang/ja'// element-ui lang
 
 export default {
-  ...ja,
+  ...elementJpLocale,
   app: {
+      menu: {
+      }
   }
 }

@@ -1,7 +1,7 @@
-import en from 'quasar/lang/en-us'
+import elementEnLocale from 'element-ui/lib/locale/lang/en' // element-ui lang
 
 export default {
-  ...en,
+  ...elementEnLocale,
   app: {
     title: 'Console Web',
     menu: {
@@ -21,6 +21,8 @@ export default {
       configFunction: 'Functions',
       configAddress: 'URL Address'
     },
+    login:'Login',
+    logout:'Logout',
     err404: 'Sorry, nothing here',
     back: 'Back',
     failed: 'Action failed',

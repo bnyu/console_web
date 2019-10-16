@@ -1,114 +1,114 @@
-import MLayout from 'src/layouts/MLayout.vue'
-import AppLayout from 'src/layouts/AppLayout.vue'
+import MLayout from '@/views/layouts/MLayout.vue'
+import AppLayout from '@/views/layouts/AppLayout.vue'
+import Dashboard from '@/views/contents/Dashboard.vue'
 
-const routePm = [
-  {
-    path: 'bulletin/post',
-    component: () => import('src/pages/bulletin/BulletinPost.vue')
-  },
-  {
-    path: 'bulletin/list',
-    component: () => import('src/pages/bulletin/BulletinList.vue')
-  },
-  {
-    path: 'email',
-    component: () => import('src/pages/email/SystemEmail.vue')
-  }
-]
+const routePm = []
 
 const routeDev = [
-  {
-    path: 'config/version',
-    component: () => import('src/pages/config/VersionConfig.vue')
-  },
-  {
-    path: 'config/function',
-    component: () => import('src/pages/config/FunctionConfig.vue')
-  },
-  {
-    path: 'config/address',
-    component: () => import('src/pages/config/AddressConfig.vue')
-  }
+    {
+        path: 'config/version',
+        component: () => import('@/views/contents/config/VersionConfig.vue')
+    },
+    {
+        path: 'config/function',
+        component: () => import('@/views/contents/config/FunctionConfig.vue')
+    },
+    {
+        path: 'config/address',
+        component: () => import('@/views/contents/config/AddressConfig.vue')
+    },
+    {
+        path: 'server/list',
+        component: () => import('@/views/contents/server/ServerList.vue')
+    }
 ]
 
 const routeOps = [
-  {
-    path: 'server/list',
-    component: () => import('src/pages/server/ServerList.vue')
-  }
+    {
+        path: 'bulletin/post',
+        component: () => import('@/views/contents/bulletin/BulletinPost.vue')
+    },
+    {
+        path: 'bulletin/list',
+        component: () => import('@/views/contents/bulletin/BulletinList.vue')
+    },
+    {
+        path: 'email',
+        component: () => import('@/views/contents/email/SystemEmail.vue')
+    }
 ]
 
 const routes = [
-  {
-    path: '/',
-    component: () => import('src/pages/Landing.vue')
-  },
-  {
-    path: '/',
-    component: MLayout,
-    children: [
-      {
-        path: 'all',
-        redirect: 'all/dashboard',
-        component: AppLayout,
-        props: { kind: 'all' },
+    {
+        path: '/',
+        component: () => import('@/views/pages/Landing.vue')
+    },
+    {
+        path: '/',
+        component: MLayout,
         children: [
-          {
-            path: 'dashboard',
-            component: () => import('src/pages/dashboard/Dashboard.vue')
-          },
-          ...routePm,
-          ...routeDev,
-          ...routeOps
+            {
+                path: 'all',
+                redirect: 'all/dashboard',
+                component: AppLayout,
+                props: {kind: 'all'},
+                children: [
+                    {
+                        path: 'dashboard',
+                        component: Dashboard
+                    },
+                    ...routePm,
+                    ...routeDev,
+                    ...routeOps
+                ]
+            },
+            {
+                path: 'pm',
+                redirect: 'pm/dashboard',
+                component: AppLayout,
+                props: {kind: 'pm'},
+                children: [
+                    {
+                        path: 'dashboard',
+                        component: Dashboard
+                    },
+                    ...routePm
+                ]
+            },
+            {
+                path: 'dev',
+                redirect: 'dev/dashboard',
+                component: AppLayout,
+                props: {kind: 'dev'},
+                children: [
+                    {
+                        path: 'dashboard',
+                        component: Dashboard
+                    },
+                    ...routeDev
+                ]
+            },
+            {
+                path: 'ops',
+                redirect: 'ops/dashboard',
+                component: AppLayout,
+                props: {kind: 'ops'},
+                children: [
+                    {
+                        path: 'dashboard',
+                        component: Dashboard
+                    },
+                    ...routeOps
+                ]
+            }
         ]
-      },
-      {
-        path: 'pm',
-        redirect: 'pm/dashboard',
-        component: AppLayout,
-        props: { kind: 'pm' },
-        children: [
-          {
-            path: 'dashboard',
-            component: () => import('src/pages/dashboard/PMDashboard.vue')
-          },
-          ...routePm
-        ]
-      },
-      {
-        path: 'dev',
-        redirect: 'dev/dashboard',
-        component: AppLayout,
-        props: { kind: 'dev' },
-        children: [
-          {
-            path: 'dashboard',
-            component: () => import('src/pages/dashboard/DevDashboard.vue')
-          },
-          ...routeDev
-        ]
-      },
-      {
-        path: 'ops',
-        redirect: 'ops/dashboard',
-        component: AppLayout,
-        props: { kind: 'ops' },
-        children: [
-          {
-            path: 'dashboard',
-            component: () => import('src/pages/dashboard/OpsDashboard.vue')
-          },
-          ...routeOps
-        ]
-      }
-    ]
-  }
+    }
 ]
 
 // Always leave this as last one
 routes.push({
-  path: '*',
-  component: () => import('src/pages/Error404.vue')
+    path: '*',
+    component: () => import('@/views/pages/Error404.vue')
 })
 
 export default routes
