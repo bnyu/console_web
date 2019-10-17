@@ -32,5 +32,7 @@
     .app-menu-bar {
         border-right: hidden;
         background-color: white;
+
+        @include no-select;
     }
 </style>

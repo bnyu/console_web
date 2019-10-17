@@ -2,7 +2,23 @@ import MLayout from '@/views/layouts/MLayout.vue'
 import AppLayout from '@/views/layouts/AppLayout.vue'
 import Dashboard from '@/views/contents/Dashboard.vue'
 
-const routePm = []
+const routeManage = [
+    {
+        path: 'role',
+        component: () => import('@/views/contents/manage/RoleManage.vue')
+    },
+    {
+        path: 'user',
+        component: () => import('@/views/contents/manage/UserManage.vue')
+    }
+]
+
+const routePm = [
+    {
+        path: 'ecology',
+        component: () => import('@/views/contents/ecology/Ecology.vue')
+    },
+]
 
 const routeDev = [
     {
@@ -48,58 +64,42 @@ const routes = [
         component: MLayout,
         children: [
             {
-                path: 'all',
-                redirect: 'all/dashboard',
+                path: 'dashboard',
                 component: AppLayout,
                 props: {kind: 'all'},
                 children: [
                     {
-                        path: 'dashboard',
+                        path: '/',
                         component: Dashboard
-                    },
-                    ...routePm,
-                    ...routeDev,
-                    ...routeOps
+                    }
                 ]
             },
             {
                 path: 'pm',
-                redirect: 'pm/dashboard',
+                redirect: 'dashboard',
                 component: AppLayout,
                 props: {kind: 'pm'},
-                children: [
-                    {
-                        path: 'dashboard',
-                        component: Dashboard
-                    },
-                    ...routePm
-                ]
+                children: routePm
             },
             {
                 path: 'dev',
-                redirect: 'dev/dashboard',
+                redirect: 'dashboard',
                 component: AppLayout,
                 props: {kind: 'dev'},
-                children: [
-                    {
-                        path: 'dashboard',
-                        component: Dashboard
-                    },
-                    ...routeDev
-                ]
+                children: routeDev
             },
             {
                 path: 'ops',
-                redirect: 'ops/dashboard',
+                redirect: 'dashboard',
                 component: AppLayout,
                 props: {kind: 'ops'},
-                children: [
-                    {
-                        path: 'dashboard',
-                        component: Dashboard
-                    },
-                    ...routeOps
-                ]
+                children: routeOps
+            },
+            {
+                path: 'manage',
+                component: AppLayout,
+                props: {kind: 'manage', hiddenNav: true},
+                children: routeManage
             }
         ]
     }

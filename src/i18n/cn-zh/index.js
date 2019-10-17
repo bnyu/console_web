@@ -3,12 +3,8 @@ import elementCnLocale from 'element-ui/lib/locale/lang/zh-CN'// element-ui lang
 export default {
   ...elementCnLocale,
   app: {
-    title: '控制台',
     menu: {
       all: '', // hide
-      pm: '运营管理',
-      dev: '开发配置',
-      ops: '运维操作',
       dashboard: '总览',
       bulletin: '公告',
       bulletinPost: '发布新公告',

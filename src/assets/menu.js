@@ -4,9 +4,31 @@ const h = {
     path: 'dashboard'
 }
 
-const pm = [
+const manage = [
+    {
+        name: 'app.menu.user',
+        path: 'user',
+        permit: 'manage'
+    },
+    {
+        name: 'app.menu.role',
+        path: 'role',
+        permit: 'manage'
+    }
+].map(item => {
+    return {...item, path: 'manage/' + item.path}
+})
 
-]
+const pm = [
+    {
+        path: 'ecology',
+        name: 'app.menu.ecology',
+        icon: 'track_changes',
+        permit: 'ecology'
+    }
+].map(item => {
+    return {...item, path: 'pm/' + item.path}
+})
 
 const dev = [
     {
@@ -44,7 +66,9 @@ const dev = [
             }
         ]
     }
-]
+].map(item => {
+    return {...item, path: 'dev/' + item.path}
+})
 
 const ops = [
     {
@@ -72,21 +96,28 @@ const ops = [
         path: 'email',
         permit: 'send_email'
     }
-]
+].map(item => {
+    return {...item, path: 'ops/' + item.path}
+})
 
 const menus = {
-    all: [h, ...pm, ...ops, ...dev].map(item => {
-        return {...item, path: 'all/' + item.path}
-    }),
-    dev: [h, ...dev].map(item => {
-        return {...item, path: 'dev/' + item.path}
-    }),
-    ops: [h, ...ops].map(item => {
-        return {...item, path: 'ops/' + item.path}
-    }),
-    pm: [h, ...pm].map(item => {
-        return {...item, path: 'pm/' + item.path}
-    }),
+    all: {
+        list: [h, ...pm, ...ops, ...dev],
+        hiddenNav: true
+    },
+    dev: {
+        list: dev
+    },
+    ops: {
+        list: ops
+    },
+    pm: {
+        list: pm
+    },
+    manage: {
+        list: manage,
+        hiddenNav: true
+    }
 }
 
 export default menus

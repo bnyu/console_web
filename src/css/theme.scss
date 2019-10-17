@@ -5,3 +5,11 @@ $warning: #CB8820;
 $danger: #D75050;
 $info: #828490;
 $space: #f8f8f8;
+
+@mixin no-select {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  -webkit-touch-callout: none;
+  user-select: none;
+}

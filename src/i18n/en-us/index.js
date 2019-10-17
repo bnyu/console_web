@@ -5,7 +5,6 @@ export default {
   app: {
     title: 'Console Web',
     menu: {
-      all: '', // hide
       pm: 'Product Manage',
       dev: 'Development',
       ops: 'Operations',
@@ -19,7 +18,8 @@ export default {
       config: 'Arg Config',
       configVersion: 'Version',
       configFunction: 'Functions',
-      configAddress: 'URL Address'
+      configAddress: 'URL Address',
+      ecology: 'Ecology'
     },
     login:'Login',
     logout:'Logout',

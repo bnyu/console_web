@@ -2,25 +2,31 @@ import Menus from '@/assets/menu'
 
 const state = {
     token: '',
+    logged: false,
     permits: {},
+    navList: [],
     menus: {}
 }
 
 const getters = {
     menuList: state => {
-        return Object.keys(state.menus)
+        return state.navList
     },
     menus: state => {
         return state.menus
     },
-    menu: state => (kind) => {
-        return state.menus[kind]
+    permits: state => {
+        return state.permits
+    },
+    logged: state => {
+        return state.logged
     }
 }
 
 const mutations = {
     setToken: (state, token) => {
         state.token = token
+        state.logged = true
     },
     setPermits: (state, permits) => {
         let ps = {}
@@ -29,31 +35,40 @@ const mutations = {
         }
 
         // set menus
-        const f = (menu) => {
+        let pathPermits = {}
+        const f = (path, menu) => {
+            let fPath = path + '/' + menu.path
             if (menu.children) {
-                const children = menu.children.map(m => f(m)).filter(m => m)
+                const children = menu.children.map(m => f(fPath, m)).filter(m => m)
                 if (children.length > 0) {
-                    return {...menu, children}
+                    return {...menu, children, rPath: children[0].rPath}
                 }
             } else if (!menu.permit || ps[menu.permit]) {
-                return {...menu}
+                pathPermits[fPath] = true
+                return {...menu, rPath: fPath}
             }
             return null
         }
 
         let myMenus = {}
+        let navList = []
         for (let k of Object.keys(Menus)) {
-            let ms = Menus[k]
+            const data = Menus[k]
+            let ms = data.list
             if (ms && ms.length > 0) {
-                ms = ms.map(m => f(m)).filter(m => m)
+                ms = ms.map(m => f('', m)).filter(m => m)
                 if (ms.length > 0) {
-                    myMenus[k] = ms
+                    myMenus[k] = {list: ms, rPath: ms[0].rPath}
+                    if (!data.hiddenNav) {
+                        navList.push(k)
+                    }
                 }
             }
         }
 
-        state.permits = ps
+        state.permits = {permits: ps, pathPermits: pathPermits}
         state.menus = myMenus
+        state.navList = navList
     }
 }
 

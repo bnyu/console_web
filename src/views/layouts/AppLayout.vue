@@ -7,12 +7,18 @@
                         <i v-if="menuOpen" class="material-icons">menu_open</i>
                         <i v-else class="material-icons">menu</i>
                     </el-button>
-                    <span class="app-title">{{$t('app.title')}}</span>
-                    <span class="app-nav">
-                        <el-button v-for="item in menuList" :key="item" v-show="$t('app.menu.'+item).length>0"
-                                   @click="()=>onClickMenu(item)" class="app-nav-link" type="text">
-                            {{$t('app.menu.'+item)}}
-                        </el-button>
+                    <span class="app-title">
+                        <span @click="()=>onClickMenu('all')" class="app-title-text">
+                            {{$t('app.title')}}
+                        </span>
+                    </span>
+                    <span class="app-nav" v-show="!hiddenNav">
+                        <span v-for="item in menuList" :key="item" :class="{ active: kind === item }">
+                            <span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                            <span @click="()=>onClickMenu(item)" class="app-nav-link">
+                                {{$t('app.menu.'+item)}}
+                            </span>
+                        </span>
                     </span>
                 </div>
                 <div>
@@ -30,14 +36,16 @@
                 <transition name="slide">
                     <div class="app-aside" v-show="menuOpen">
                         <el-scrollbar style="height: 100%">
-                            <AppMenu class="app-menu-list" v-bind:menus="menu" v-bind:path="''"/>
+                            <AppMenu class="app-menu-list" v-if="menu" v-bind:menus="menu.list" v-bind:path="''"/>
                         </el-scrollbar>
                     </div>
                 </transition>
                 <div :class="'app-content' + contentClass">
                     <el-scrollbar style="height: 100%">
                         <div class="content">
-                            <router-view/>
+                            <transition name="fade" mode="out-in">
+                                <router-view/>
+                            </transition>
                         </div>
                     </el-scrollbar>
                 </div>
@@ -55,11 +63,12 @@
         name: "AppLayout",
         components: {UserOption, LangSelector, AppMenu},
         props: {
+            hiddenNav: Boolean,
             kind: String
         },
         data() {
             return {
-                menuOpen: true,
+                menuOpen: false,
                 menuList: this.$store.getters['user/menuList'],
                 menus: this.$store.getters['user/menus']
             }
@@ -78,11 +87,21 @@
         },
         methods: {
             onClickMenu(kind) {
-                this.$router.push('/' + kind + '/dashboard')
-                this.menuOpen = true
+                if (kind === this.kind) {
+                    this.menuOpen = true
+                    return
+                }
+                if (this.menus[kind]) {
+                    this.$router.push(this.menus[kind].rPath).then(() =>
+                        this.menuOpen = true
+                    )
+                }
             }
         },
         mounted() {
+            if (this.menus[this.kind]) {
+                this.menuOpen = true
+            }
         }
     }
 </script>
@@ -90,47 +109,56 @@
 <style scoped lang="scss">
     .app {
         &-header {
+            @include no-select;
             display: flex;
             flex-direction: row;
             justify-content: space-between;
             align-content: center;
             align-items: center;
             background-color: $primary;
-            color: $space;
             height: 60px !important;
             box-shadow: 0 2px 4px #aaaab4;
 
             .app-nav {
-                display: inline-flex;
-                flex-direction: row;
-                justify-content: space-around;
-
                 &-link {
-                    color: $space;
-                    font-weight: bold;
-                    padding-left: 16px;
+                    color: rgba(255, 255, 255, 0.88);
+                    cursor: pointer;
 
                     &:hover {
                         color: white;
                     }
                 }
+
+                .active {
+                    .app-nav-link {
+                        color: $positive;
+                    }
+                }
             }
 
-            .app-header-left * {
+            .app-header-left > * {
                 display: inline-block;
                 vertical-align: middle;
             }
 
             .app-title {
-                color: white;
-                font-weight: bold;
                 max-width: 180px;
                 padding-left: 20px;
                 padding-right: 60px;
+
+                &-text {
+                    color: white;
+                    font-weight: bolder;
+                    cursor: pointer;
+                }
             }
 
             .material-icons {
                 color: white;
+
+                &:hover {
+                    color: white;
+                }
             }
         }
 
@@ -175,6 +203,18 @@
                 justify-content: center;
             }
         }
+    }
+
+    .fade-enter-active {
+        transition: all .3s ease;
+    }
+
+    .fade-leave-active {
+        transition: all .1s ease;
+    }
+
+    .fade-enter, .fade-leave-to {
+        opacity: 0;
     }
 
     .slide-enter-active {

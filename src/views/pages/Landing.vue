@@ -1,26 +1,26 @@
 <template>
     <div>
-        <el-checkbox-group v-model="checkedPermits">
-            <el-checkbox v-for="item in permits" :label="item" :key="item">{{item}}</el-checkbox>
-        </el-checkbox-group>
-        <el-button @click="login">{{$t('app.login')}}</el-button>
+        <div v-if="!logged">
+            <Login></Login>
+        </div>
+        <div v-else>
+
+        </div>
     </div>
 </template>
 
 <script>
+    import Login from "@/views/user/Login"
     export default {
         name: "Landing",
+        components: {Login},
         data() {
             return {
-                permits: ['view_bulletin', 'post_bulletin', 'send_email', 'config_version', 'config_function', 'config_address', 'view_server_list'],
-                checkedPermits: []
+                logged: this.$store.getters['user/logged']
             }
         },
         methods: {
-            login() {
-                this.$store.commit('user/setPermits', this.checkedPermits)
-                this.$router.push('/all/dashboard')
-            }
+
         }
     }
 </script>

@@ -1,12 +1,12 @@
 <template>
-    <el-dropdown>
+    <el-dropdown @command="changeLang">
       <span class="el-dropdown-link">
           <slot></slot>
       </span>
         <el-dropdown-menu slot="dropdown">
-            <el-dropdown-item class="lang-item" v-on:command="lang='en-us'">English</el-dropdown-item>
-            <el-dropdown-item class="lang-item" v-on:command="lang='cn-zh'">中文</el-dropdown-item>
-            <el-dropdown-item class="lang-item" v-on:command="lang='jp-ja'">日本語</el-dropdown-item>
+            <el-dropdown-item class="lang-item" command="en-us">English</el-dropdown-item>
+            <el-dropdown-item class="lang-item" command="cn-zh">中文</el-dropdown-item>
+            <el-dropdown-item class="lang-item" command="jp-ja">日本語</el-dropdown-item>
         </el-dropdown-menu>
     </el-dropdown>
 </template>
@@ -16,14 +16,9 @@
 
     export default {
         name: 'LangSelector',
-        data() {
-            return {
-                lang: i18n.locale
-            }
-        },
-        watch: {
-            lang: function () {
-                i18n.locale = this.lang
+        methods: {
+            changeLang(lang) {
+                i18n.locale = lang
             }
         }
     }
