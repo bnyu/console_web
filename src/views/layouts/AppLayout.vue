@@ -8,14 +8,14 @@
                         <i v-else class="material-icons">menu</i>
                     </el-button>
                     <span class="app-title">
-                        <span @click="()=>onClickMenu('all')" class="app-title-text">
+                        <span @click="()=>onClickMenu('dashboard', '/dashboard')" class="app-title-text">
                             {{$t('app.title')}}
                         </span>
                     </span>
                     <span class="app-nav" v-show="!hiddenNav">
-                        <span v-for="item in menuList" :key="item.kind" :class="{ active: kind === item }">
+                        <span v-for="item in menuList" :key="item.kind" :class="{ active: kind === item.kind }">
                             <span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
-                            <span @click="()=>onClickMenu(item.kind)" class="app-nav-link">
+                            <span @click="()=>onClickMenu(item.kind, item.path0)" class="app-nav-link">
                                 {{$t(item.name)}}
                             </span>
                         </span>
@@ -55,6 +55,7 @@
 </template>
 
 <script>
+    import store from '@/store/index'
     import AppMenu from "@/views/components/AppMenu"
     import LangSelector from "@/views/components/LangSelector"
     import UserOption from "@/views/components/UserOption"
@@ -69,6 +70,8 @@
         data() {
             return {
                 menuOpen: false,
+                logged: this.$store.getters['user/logged'],
+                pathPermits: this.$store.getters['user/pathPermits'],
                 menuList: this.$store.getters['user/menuList'],
                 menus: this.$store.getters['user/menus']
             }
@@ -86,21 +89,43 @@
             }
         },
         methods: {
-            onClickMenu(kind) {
+            onClickMenu(kind, path0) {
                 if (kind === this.kind) {
                     this.menuOpen = true
                     return
                 }
-                if (this.menus[kind] && this.menus[kind].length > 0) {
-                    this.$router.push(this.menus[kind][0].fPath).then(() =>
-                        this.menuOpen = true
-                    )
-                }
+                this.$router.push(path0).then(() =>
+                    this.menuOpen = true
+                )
             }
         },
         mounted() {
-            if (this.menus[this.kind]) {
+            if (this.menu) {
                 this.menuOpen = true
+            }
+        },
+        beforeRouteEnter(to, from, next) {
+            let logged = store.getters['user/logged']
+            let pathPermits = store.getters['user/pathPermits']
+            if (logged) {
+                if (pathPermits && pathPermits[to.path]) {
+                    next()
+                } else {
+                    next('/404')
+                }
+            } else {
+                next('/')
+            }
+        },
+        beforeRouteUpdate(to, from, next) {
+            if (this.logged) {
+                if (this.pathPermits && this.pathPermits[to.path]) {
+                    next()
+                } else {
+                    next('/404')
+                }
+            } else {
+                next('/')
             }
         }
     }

@@ -1,20 +1,22 @@
+import Landing from "@/views/pages/Landing"
 import MLayout from '@/views/layouts/MLayout.vue'
-
-const addRoutes = {
-    path: '/',
-    component: MLayout
-}
+import Error404 from  '@/views/pages/Error404.vue'
+import Menus from './menus.js'
 
 const routes = [
     {
         path: '/',
-        component: () => import('@/views/pages/Landing.vue')
+        component: Landing
+    },
+    {
+        path: '/',
+        component: MLayout,
+        children: Menus
+    },
+    {
+        path: '*',
+        component: Error404
     }
 ]
 
-const route404 = {
-    path: '*',
-    component: () => import('@/views/pages/Error404.vue')
-}
-
-export {routes, addRoutes, route404}
+export default routes

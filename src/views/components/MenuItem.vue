@@ -1,6 +1,6 @@
 <template>
     <div v-if="menu" class="app-menu">
-        <el-submenu v-if="menu.children" :index="menu.fPath">
+        <el-submenu v-if="menu.children" :index="menu.path">
             <template slot="title">
                 <span class="menu-title submenu-title" :style="styleHeight">
                         <span>
@@ -10,11 +10,11 @@
                         <i class="menu-open material-icons">keyboard_arrow_down</i>
                 </span>
             </template>
-            <MenuItem v-for="item in menu.children" :key="item.fPath"
+            <MenuItem v-for="item in menu.children" :key="item.path"
                       v-bind:menu="item" v-bind:level="level + 1"
             />
         </el-submenu>
-        <el-menu-item v-else :index="menu.fPath">
+        <el-menu-item v-else :index="menu.path">
             <template slot="title">
                 <span class="menu-title" :style="styleHeight">
                         <i class="menu-icon material-icons" :style="stylePadding">{{menu.icon}}</i>

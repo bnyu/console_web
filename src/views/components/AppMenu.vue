@@ -4,7 +4,7 @@
                  :default-active="enterPath"
                  router
         >
-            <MenuItem v-for="item in menus" :key="item.fPath"
+            <MenuItem v-for="item in menus" :key="item.path"
                       v-bind:menu="item" v-bind:level="0"/>
         </el-menu>
     </div>

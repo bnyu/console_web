@@ -3,19 +3,22 @@ const AppLayout = () => import('@/views/layouts/AppLayout.vue')
 
 const menus = [
     {
-        path: 'all',
-        props: {kind: 'all'},
+        onDashboard: true,
+        path: 'dashboard',
+        redirect: 'dashboard/all',
+        props: {kind: 'dashboard'},
         component: AppLayout,
         children: [
             {
                 name: 'app.menu.dashboard',
                 icon: 'dashboard',
-                path: 'dashboard',
+                path: 'all',
                 component: () => import('@/views/contents/Dashboard.vue')
             }
         ]
     },
     {
+        onDashboard: true,
         name: 'app.menu.dev',
         path: 'dev',
         props: {kind: 'dev'},
@@ -65,6 +68,7 @@ const menus = [
         ]
     },
     {
+        onDashboard: true,
         name: 'app.menu.ops',
         path: 'ops',
         props: {kind: 'ops'},
@@ -102,6 +106,7 @@ const menus = [
         ]
     },
     {
+        onDashboard: true,
         name: 'app.menu.pm',
         path: 'pm',
         props: {kind: 'pm'},
