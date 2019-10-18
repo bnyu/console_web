@@ -1,3 +1,4 @@
+import {addRoutes, route404} from "@/router/routes"
 import Menus from '@/assets/menu'
 
 const state = {
@@ -5,10 +6,14 @@ const state = {
     logged: false,
     permits: {},
     navList: [],
-    menus: {}
+    menus: {},
+    routes: []
 }
 
 const getters = {
+    routes: state => {
+        return state.routes
+    },
     menuList: state => {
         return state.navList
     },
@@ -35,40 +40,37 @@ const mutations = {
         }
 
         // set menus
-        let pathPermits = {}
         const f = (path, menu) => {
             let fPath = path + '/' + menu.path
             if (menu.children) {
                 const children = menu.children.map(m => f(fPath, m)).filter(m => m)
                 if (children.length > 0) {
-                    return {...menu, children, rPath: children[0].rPath}
+                    return {...menu, fPath, redirect: children[0].fPath, children}
                 }
             } else if (!menu.permit || ps[menu.permit]) {
-                pathPermits[fPath] = true
-                return {...menu, rPath: fPath}
+                return {...menu, fPath}
             }
             return null
         }
 
+        let routers = Menus.map(m => f('', m)).filter(m => m)
+
         let myMenus = {}
         let navList = []
-        for (let k of Object.keys(Menus)) {
-            const data = Menus[k]
-            let ms = data.list
-            if (ms && ms.length > 0) {
-                ms = ms.map(m => f('', m)).filter(m => m)
-                if (ms.length > 0) {
-                    myMenus[k] = {list: ms, rPath: ms[0].rPath}
-                    if (!data.hiddenNav) {
-                        navList.push(k)
-                    }
-                }
+        for (let i = 0; i < routers.length; i++) {
+            let ms = routers[i]
+            let kind = ms.path
+            myMenus[kind] = ms.children
+            if (ms.name) {
+                navList.push({kind, name: ms.name})
             }
         }
 
-        state.permits = {permits: ps, pathPermits: pathPermits}
+        state.permits = ps
         state.menus = myMenus
         state.navList = navList
+        routers.push(route404)
+        state.routes = [{...addRoutes, children: routers}]
     }
 }
 

@@ -3,7 +3,7 @@
         <el-container>
             <el-header class="app-header" height="60px">
                 <div class="app-header-left">
-                    <el-button type="text" @click="menuOpen=!menuOpen">
+                    <el-button v-show="menu" type="text" @click="menuOpen=!menuOpen">
                         <i v-if="menuOpen" class="material-icons">menu_open</i>
                         <i v-else class="material-icons">menu</i>
                     </el-button>
@@ -13,10 +13,10 @@
                         </span>
                     </span>
                     <span class="app-nav" v-show="!hiddenNav">
-                        <span v-for="item in menuList" :key="item" :class="{ active: kind === item }">
+                        <span v-for="item in menuList" :key="item.kind" :class="{ active: kind === item }">
                             <span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
-                            <span @click="()=>onClickMenu(item)" class="app-nav-link">
-                                {{$t('app.menu.'+item)}}
+                            <span @click="()=>onClickMenu(item.kind)" class="app-nav-link">
+                                {{$t(item.name)}}
                             </span>
                         </span>
                     </span>
@@ -36,7 +36,7 @@
                 <transition name="slide">
                     <div class="app-aside" v-show="menuOpen">
                         <el-scrollbar style="height: 100%">
-                            <AppMenu class="app-menu-list" v-if="menu" v-bind:menus="menu.list" v-bind:path="''"/>
+                            <AppMenu class="app-menu-list" v-if="menu" v-bind:menus="menu"/>
                         </el-scrollbar>
                     </div>
                 </transition>
@@ -91,8 +91,8 @@
                     this.menuOpen = true
                     return
                 }
-                if (this.menus[kind]) {
-                    this.$router.push(this.menus[kind].rPath).then(() =>
+                if (this.menus[kind] && this.menus[kind].length > 0) {
+                    this.$router.push(this.menus[kind][0].fPath).then(() =>
                         this.menuOpen = true
                     )
                 }

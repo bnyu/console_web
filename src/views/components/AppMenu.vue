@@ -4,8 +4,8 @@
                  :default-active="enterPath"
                  router
         >
-            <MenuItem v-for="item in menus" :key="item.path"
-                      v-bind:path="path" v-bind:menu="item" v-bind:level="0"/>
+            <MenuItem v-for="item in menus" :key="item.fPath"
+                      v-bind:menu="item" v-bind:level="0"/>
         </el-menu>
     </div>
 </template>
@@ -17,7 +17,6 @@
         name: "AppMenu",
         components: {MenuItem},
         props: {
-            path: String,
             menus: Array[Object]
         },
         computed: {

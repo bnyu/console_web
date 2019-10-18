@@ -14,7 +14,7 @@
         name: "UserOption",
         data() {
             return {
-                permits: this.$store.getters['user/permits'].permits
+                permits: this.$store.getters['user/permits']
             }
         },
         methods: {

@@ -19,7 +19,8 @@
         methods: {
             login() {
                 this.$store.commit('user/setPermits', this.checkedPermits)
-                this.$router.push('/dashboard')
+                this.$router.addRoutes(this.$store.getters['user/routes'])
+                this.$router.push('/all')
             }
         }
     }

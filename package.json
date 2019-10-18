@@ -1,7 +1,7 @@
 {
   "name": "console_web",
   "author": "bnyu <xuyue1106@gmail.com>",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
