@@ -28,6 +28,14 @@ const getters = {
 }
 
 const mutations = {
+    logout: (state) => {
+        state.token = ''
+        state.logged = false
+        state.pathPermits = {}
+        state.permits = {}
+        state.navList = []
+        state.menus = {}
+    },
     setToken: (state, token) => {
         state.token = token
         state.logged = true

@@ -4,7 +4,7 @@
           <slot></slot>
       </span>
         <el-dropdown-menu slot="dropdown">
-            <el-dropdown-item v-if="permits&&permits.manage" command="/manage/user">{{$t('app.manageUser')}}</el-dropdown-item>
+            <el-dropdown-item v-if="manager" command="/manage/user">{{$t('app.menu.manageUser')}}</el-dropdown-item>
             <el-dropdown-item command="logout">{{$t('app.logout')}}</el-dropdown-item>
         </el-dropdown-menu>
     </el-dropdown>
@@ -12,14 +12,13 @@
 <script>
     export default {
         name: "UserOption",
-        data() {
-            return {
-                permits: this.$store.getters['user/permits']
-            }
+        props: {
+            manager: Boolean
         },
         methods: {
             to(path) {
                 if (path === 'logout') {
+                    this.$store.commit('user/logout')
                     this.$router.push('/')
                 } else if (path !== this.$route.path) {
                     this.$router.push(path)

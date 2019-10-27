@@ -25,9 +25,9 @@
                     <span>
                         <LangSelector><i class="material-icons">translate</i></LangSelector>
                     </span>
-                    &nbsp;
+                    <span>&nbsp;&nbsp;</span>
                     <span>
-                        <UserOption><i class="material-icons">person</i></UserOption>
+                        <UserOption v-bind:manager="manager"><i class="material-icons">person</i></UserOption>
                     </span>
                 </div>
 
@@ -68,12 +68,12 @@
             kind: String
         },
         data() {
+            const menus = this.$store.getters['user/menus']
             return {
                 menuOpen: false,
-                logged: this.$store.getters['user/logged'],
-                pathPermits: this.$store.getters['user/pathPermits'],
                 menuList: this.$store.getters['user/menuList'],
-                menus: this.$store.getters['user/menus']
+                menus: menus,
+                manager: !!menus.manage
             }
         },
         computed: {
@@ -118,14 +118,11 @@
             }
         },
         beforeRouteUpdate(to, from, next) {
-            if (this.logged) {
-                if (this.pathPermits && this.pathPermits[to.path]) {
-                    next()
-                } else {
-                    next('/404')
-                }
+            let pathPermits = store.getters['user/pathPermits']
+            if (pathPermits && pathPermits[to.path]) {
+                next()
             } else {
-                next('/')
+                next('/404')
             }
         }
     }
