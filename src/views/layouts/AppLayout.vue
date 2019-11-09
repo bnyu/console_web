@@ -2,7 +2,7 @@
     <div>
         <el-container>
             <el-header class="app-header" height="60px">
-                <div class="app-header-left">
+                <div class="app-header-side">
                     <el-button v-show="menu" type="text" @click="menuOpen=!menuOpen">
                         <i v-if="menuOpen" class="material-icons">menu_open</i>
                         <i v-else class="material-icons">menu</i>
@@ -21,13 +21,20 @@
                         </span>
                     </span>
                 </div>
-                <div>
+                <div class="app-header-side header-right">
+                    <span v-if="username==='root'">
+                        <el-tooltip class="item" effect="dark" placement="bottom">
+                            <template slot="content">
+                                <span>{{$t('app.menu.userManage')}}</span>
+                            </template>
+                            <el-button type="text" @click="toManagerPage"><i class="material-icons">people_alt</i></el-button>
+                        </el-tooltip>
+                    </span>
                     <span>
                         <LangSelector><i class="material-icons">translate</i></LangSelector>
                     </span>
-                    <span>&nbsp;&nbsp;</span>
                     <span>
-                        <UserOption v-bind:manager="manager"><i class="material-icons">person</i></UserOption>
+                        <UserOption><span class="username">{{username}}</span></UserOption>
                     </span>
                 </div>
 
@@ -68,12 +75,11 @@
             kind: String
         },
         data() {
-            const menus = this.$store.getters['user/menus']
             return {
                 menuOpen: false,
                 menuList: this.$store.getters['user/menuList'],
-                menus: menus,
-                manager: !!menus.manage
+                menus: this.$store.getters['user/menus'],
+                username: this.$store.getters['user/username'],
             }
         },
         computed: {
@@ -97,6 +103,13 @@
                 this.$router.push(path0).then(() =>
                     this.menuOpen = true
                 )
+            },
+            toManagerPage() {
+                if (this.kind !== 'manager') {
+                    this.$router.push('/manager').then(() =>
+                        this.menuOpen = true
+                    )
+                }
             }
         },
         mounted() {
@@ -130,6 +143,8 @@
 
 <style scoped lang="scss">
     .app {
+        min-width: 400px;
+
         &-header {
             @include no-select;
             display: flex;
@@ -158,9 +173,13 @@
                 }
             }
 
-            .app-header-left > * {
+            .app-header-side > * {
                 display: inline-block;
                 vertical-align: middle;
+            }
+
+            .header-right > * {
+                padding-left: 8px;
             }
 
             .app-title {
@@ -181,6 +200,11 @@
                 &:hover {
                     color: white;
                 }
+            }
+
+            .username {
+                color: white;
+                font-size: 16px;
             }
         }
 
@@ -261,5 +285,13 @@
 <style lang="scss">
     .el-scrollbar__wrap {
         overflow-x: hidden !important;
+    }
+
+    .el-tooltip__popper {
+        background: $primary !important;
+        .popper__arrow::after {
+            color: $primary !important;
+            border-bottom-color: $primary !important;
+        }
     }
 </style>

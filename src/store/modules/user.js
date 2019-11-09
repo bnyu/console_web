@@ -1,8 +1,11 @@
 import Menus from '@/router/menus.js'
+import http from '@/api/axios'
 
 const state = {
+    username: '',
+    uid: 0,
+    secure: false,
     token: '',
-    logged: false,
     pathPermits: {},
     permits: {},
     navList: [],
@@ -23,22 +26,34 @@ const getters = {
         return state.permits
     },
     logged: state => {
-        return state.logged
-    }
+        return state.uid !== 0
+    },
+    uid: state => {
+        return state.uid
+    },
+    username: state => {
+        return state.username
+    },
 }
 
 const mutations = {
     logout: (state) => {
+        state.uid = 0
+        state.username = ''
         state.token = ''
-        state.logged = false
+        state.secure = false
         state.pathPermits = {}
         state.permits = {}
         state.navList = []
         state.menus = {}
+        http.defaults.headers.common['X-Token'] = ''
     },
-    setToken: (state, token) => {
+    login: (state, {uid, username, token, secure}) => {
+        state.uid = uid
+        state.username = username
         state.token = token
-        state.logged = true
+        state.secure = secure
+        http.defaults.headers.common['X-Token'] = token
     },
     setPermits: (state, permits) => {
         let ps = {}

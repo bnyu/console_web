@@ -2,7 +2,7 @@
     <div v-if="menus">
         <el-menu class="app-menu-bar"
                  :default-active="enterPath"
-                 router
+                 @select="handelRoute"
         >
             <MenuItem v-for="item in menus" :key="item.path"
                       v-bind:menu="item" v-bind:level="0"/>
@@ -22,6 +22,13 @@
         computed: {
             enterPath() {
                 return this.$route.path
+            }
+        },
+        methods: {
+            handelRoute(index) {
+                if (this.enterPath !== index) {
+                    this.$router.push(index).then()
+                }
             }
         }
     }

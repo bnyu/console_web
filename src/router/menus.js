@@ -122,20 +122,21 @@ const menus = [
         ]
     },
     {
-        path: 'manage',
-        props: {kind: 'manage', hiddenNav: true},
+        path: 'manager',
+        props: {kind: 'manager', hiddenNav: true},
+        redirect: 'manager/role',
         component: AppLayout,
         children: [
             {
-                name: 'app.menu.user',
-                path: 'user',
-                permit: 'manage',
+                name: 'app.menu.roleManage',
+                path: 'role',
+                permit: 'root',
                 component: () => import('@/views/contents/manage/RoleManage.vue')
             },
             {
-                name: 'app.menu.role',
-                path: 'role',
-                permit: 'manage',
+                name: 'app.menu.userManage',
+                path: 'user',
+                permit: 'root',
                 component: () => import('@/views/contents/manage/UserManage.vue')
             }
         ]

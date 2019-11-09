@@ -2,8 +2,8 @@ import Vue from 'vue'
 import axios from 'axios'
 
 const axiosInstance = axios.create({
-    baseURL: process.env.API_BASE_URL,
-    timeout: 6000
+    baseURL: process.env.VUE_APP_API_URL,
+    timeout: 6000,
 })
 
 Vue.prototype.$axios = axiosInstance
@@ -13,7 +13,7 @@ Vue.prototype.$axios = axiosInstance
 //     return config
 //   },
 //   error => {
-//     return Promise.reject(error)
+//     return Promise.reject({error})
 //   }
 // )
 
@@ -22,11 +22,11 @@ axiosInstance.interceptors.response.use(
         if (response.status === 200 && response.data) {
             return response.data
         } else {
-            return Promise.reject(new Error(response.statusText || 'error request'))
+            return Promise.reject({error: new Error(response.statusText || 'error request')})
         }
     },
     error => {
-        return Promise.reject(error)
+        return Promise.reject({error})
     }
 )
 

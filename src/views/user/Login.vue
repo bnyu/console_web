@@ -25,30 +25,34 @@
                         name="password"
                         type="password"
                         tabindex="2"
+                        show-password
                         @keyup.enter.native="handleLogin"
                 ></el-input>
             </el-form-item>
 
             <el-button :loading="loading" type="primary" class="login-button"
                        @click.native.prevent="handleLogin">
-                {{$t('app.login')}}
+                {{$t('app.user.login')}}
             </el-button>
         </el-form>
     </div>
 </template>
 
 <script>
+    import api from '@/api/modules/user'
+    import Err from '@/assets/error_code'
+
     export default {
         name: 'Login',
         data() {
             return {
                 loginForm: {
-                    username: 'test',
-                    password: 'test'
+                    username: '',
+                    password: ''
                 },
                 loginRules: {
-                    username: [{required: true, trigger: 'blur'}],
-                    password: [{required: true, trigger: 'blur'}]
+                    username: [{required: true, trigger: 'blur', message: this.$t('app.notice.inputUsername')}],
+                    password: [{required: true, trigger: 'blur', message: this.$t('app.notice.inputPassword')}]
                 },
                 logged: this.$store.getters['user/logged'],
                 loading: false
@@ -56,16 +60,42 @@
         },
         methods: {
             login() {
-                let token = 'test'
-                let permits = ['view_bulletin', 'post_bulletin', 'send_email', 'config_version', 'config_function', 'config_address', 'view_server_list', 'ecology', 'manage']
-                this.$store.commit('user/setPermits', permits)
-                this.$store.commit('user/setToken', token)
-                this.$router.push('/dashboard')
+                this.loading = true
+                const username = this.loginForm.username
+                const password = this.loginForm.password
+                api.login(username, password).then(data => {
+                    const uid = data.uid
+                    const token = data.token
+                    const secure = data.secure
+                    this.$store.commit('user/login', {uid, username, token, secure})
+                    this.$store.commit('user/setPermits', data.permits)
+                    this.$router.push('/dashboard').then()
+                }).catch(({code, err}) => {
+                    if (code === Err.BaseErrorCode.WrongPassword) {
+                        this.$message({
+                            message: this.$t('app.notice.wrongPassword'),
+                            type: 'error',
+                            duration: 2000,
+                        })
+                    } else if (err) {
+                        this.$message({
+                            message: this.$t('app.notice.networkError'),
+                            type: 'error',
+                            duration: 2000,
+                        })
+                    } else {
+                        this.$message({
+                            message: this.$t('app.notice.serverError'),
+                            type: 'error',
+                            duration: 2000,
+                        })
+                    }
+                    this.loading = false
+                })
             },
             handleLogin() {
                 this.$refs.loginForm.validate(v => {
                     if (v) {
-                        this.loading = true
                         this.login()
                     }
                 })
@@ -82,6 +112,9 @@
 <style lang="scss" scoped>
     .login-container {
         position: fixed;
+        display: flex;
+        flex-direction: column;
+        align-self: center;
         width: 100%;
         background-color: #354459;
         overflow: hidden;
@@ -95,19 +128,19 @@
         .login {
             &-input {
                 display: inline-block;
-                width: 85%;
+                width: 100%;
             }
 
             &-form {
                 position: relative;
-                width: 520px;
+                width: 500px;
                 padding-top: 160px;
                 margin: 0 auto;
                 overflow: hidden;
             }
 
             &-button {
-                width: 85%;
+                width: 100%;
                 margin-top: 10px;
             }
         }

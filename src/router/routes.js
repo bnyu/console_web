@@ -14,8 +14,10 @@ const routes = [
         children: Menus
     },
     {
-        path: '/404',
-        component: Error404
+        path: '/user',
+        component: MLayout,
+        children: [
+        ]
     },
     {
         path: '*',
