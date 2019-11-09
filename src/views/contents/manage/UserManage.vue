@@ -354,11 +354,6 @@
                             duration: 1000,
                         })
                     }
-                    this.$message({
-                        message: this.$t('app.notice.someError'),
-                        type: 'error',
-                        duration: 1000,
-                    })
                     this.loading = false
                 })
             }

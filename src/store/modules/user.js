@@ -34,6 +34,9 @@ const getters = {
     username: state => {
         return state.username
     },
+    secure: state => {
+        return state.secure
+    }
 }
 
 const mutations = {
@@ -54,6 +57,9 @@ const mutations = {
         state.token = token
         state.secure = secure
         http.defaults.headers.common['X-Token'] = token
+    },
+    setSecure: (state, secure) => {
+        state.secure = secure
     },
     setPermits: (state, permits) => {
         let ps = {}
