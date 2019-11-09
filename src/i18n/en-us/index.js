@@ -27,11 +27,14 @@ export default {
         },
         act: {
             operation: 'Operation',
+            failed: 'Action failed',
+            success: 'Action success',
             back: 'Back',
             confirm: 'Confirm',
             cancel: 'Cancel',
             delete: 'Delete',
             edit: 'Edit',
+            preview: 'Preview',
             view: 'View',
             refresh: 'Refresh',
             addNew: 'Add New',
@@ -43,6 +46,8 @@ export default {
             login: 'Login',
             logout: 'Logout',
             register: 'Register',
+            password: 'Password',
+            newPassword: 'New Password',
             changePassword: 'Change Password',
             username: 'Username',
             roleList: 'Role List',
@@ -56,7 +61,20 @@ export default {
             someError: 'Some Error Occur',
             userDeleted: 'This user is deleted',
             inputUsername: 'Please input username',
-            inputPassword: 'Please input password'
+            inputPassword: 'Please input password',
+            inputOldPassword: 'Please input old password',
+            inputNewPassword: 'Please input new password',
+            passwordNotChange: 'Password not changed',
+            passwordIllegal: 'Password length should 6 and 64',
+            repeatNewPassword: 'Please repeat the new password',
+            newPasswordNotSame: 'Please repeat the new password',
+            changePasswordSuccess: 'Password changed success',
+            addNewUser: 'Add new user',
+            addNewUserSuccess: 'Add new user success',
+            addNewRole: 'Add new role',
+            addNewRoleSuccess: 'Add new role success',
+            inputRoleName: 'Please input role name',
+            maxRoleSize: 'At role max size'
         },
         permit: {
             config_address: "config address",
@@ -71,7 +89,5 @@ export default {
         username: 'Username',
         password: 'Password',
         err404: 'Sorry, nothing here',
-        failed: 'Action failed',
-        success: 'Action success'
     }
 }

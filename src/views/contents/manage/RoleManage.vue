@@ -304,14 +304,14 @@
 
             addNew(name) {
                 this.loading = true
-                api.addRole(name).then(id => {
-                    let data = [{role_id: id, role_name: name}]
-                    data[0].loading = false
-                    data[0].edit = false
-                    data[0].permit_list = []
-                    data[0].permit_list_a = []
-                    data[0].permits = {}
-                    this.roleList = data
+                api.addRole(name).then(data => {
+                    let list = [{role_id: data.role_id, role_name: name}]
+                    list[0].loading = false
+                    list[0].edit = false
+                    list[0].permit_list = []
+                    list[0].permit_list_a = []
+                    list[0].permits = {}
+                    this.roleList = list
                     this.loading = false
                     this.$message({
                         message: this.$t('app.notice.addNewRoleSuccess'),

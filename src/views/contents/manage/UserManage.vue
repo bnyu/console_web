@@ -324,14 +324,14 @@
 
             addNew(username, password) {
                 this.loading = true
-                api.addUser(username, password).then(id => {
-                    let data = [{user_id: id, username: username}]
-                    data[0].loading = false
-                    data[0].edit = false
-                    data[0].role_list = []
-                    data[0].role_list_a = []
-                    data[0].roles = {}
-                    this.userList = data
+                api.addUser(username, password).then(data => {
+                    let list = [{user_id: data.user_id, username: username}]
+                    list[0].loading = false
+                    list[0].edit = false
+                    list[0].role_list = []
+                    list[0].role_list_a = []
+                    list[0].roles = {}
+                    this.userList = list
                     this.loading = false
                     this.$message({
                         message: this.$t('app.notice.addNewUserSuccess'),
