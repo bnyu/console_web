@@ -3,33 +3,27 @@
         <el-container>
             <el-header class="app-header" height="60px">
                 <div class="app-header-side">
-                    <el-button v-show="menu" type="text" @click="menuOpen=!menuOpen">
+                    <el-button v-show="menus" type="text" @click="menuOpen=!menuOpen">
                         <i v-if="menuOpen" class="material-icons">menu_open</i>
                         <i v-else class="material-icons">menu</i>
                     </el-button>
                     <span class="app-title">
-                        <span @click="()=>onClickMenu('dashboard', '/dashboard')" class="app-title-text">
+                        <span @click="onClickTitle" class="app-title-text">
                             {{$t('app.title')}}
                         </span>
                     </span>
-                    <span class="app-nav" v-show="!hiddenNav">
-                        <span v-for="item in menuList" :key="item.kind" :class="{ active: kind === item.kind }">
-                            <span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
-                            <span @click="()=>onClickMenu(item.kind, item.path0)" class="app-nav-link">
-                                {{$t(item.name)}}
+                    <span class="app-nav">
+                        <span v-for="(item, index) in menuList" :key="index">
+                            <span v-if="!item.hidden" :class="{ active: index === menuIndex }">
+                                &nbsp;&nbsp;&nbsp;&nbsp;
+                                <span @click="()=>onClickMenu(index)" class="app-nav-link">
+                                    {{$t(item.name)}}
+                                </span>
                             </span>
                         </span>
                     </span>
                 </div>
                 <div class="app-header-side header-right">
-                    <span v-if="username==='root'">
-                        <el-tooltip class="item" effect="dark" placement="bottom">
-                            <template slot="content">
-                                <span>{{$t('app.menu.userManage')}}</span>
-                            </template>
-                            <el-button type="text" @click="toManagerPage"><i class="material-icons">people_alt</i></el-button>
-                        </el-tooltip>
-                    </span>
                     <span>
                         <LangSelector><i class="material-icons">translate</i></LangSelector>
                     </span>
@@ -37,13 +31,13 @@
                         <UserOption><span class="username">{{username}}</span></UserOption>
                     </span>
                 </div>
-
             </el-header>
+
             <el-main class="app-main">
                 <transition name="slide">
                     <div class="app-aside" v-show="menuOpen">
                         <el-scrollbar style="height: 100%">
-                            <AppMenu class="app-menu-list" v-if="menu" v-bind:menus="menu"/>
+                            <AppMenu class="app-menu-list" v-bind:menus="menus"/>
                         </el-scrollbar>
                     </div>
                 </transition>
@@ -62,30 +56,23 @@
 </template>
 
 <script>
-    import store from '@/store/index'
     import AppMenu from "@/views/components/AppMenu"
     import LangSelector from "@/views/components/LangSelector"
-    import UserOption from "@/views/components/UserOption"
+    import UserOption from "@/views/components/user/UserOption"
 
     export default {
         name: "AppLayout",
         components: {UserOption, LangSelector, AppMenu},
-        props: {
-            hiddenNav: Boolean,
-            kind: String
-        },
         data() {
             return {
                 menuOpen: false,
+                menuIndex: -1,
+                menus: [],
                 menuList: this.$store.getters['user/menuList'],
-                menus: this.$store.getters['user/menus'],
                 username: this.$store.getters['user/username'],
             }
         },
         computed: {
-            menu() {
-                return this.menus[this.kind]
-            },
             contentClass() {
                 if (this.menuOpen) {
                     return ' right-slide'
@@ -95,48 +82,44 @@
             }
         },
         methods: {
-            onClickMenu(kind, path0) {
-                if (kind === this.kind) {
-                    this.menuOpen = true
-                    return
+            onClickTitle() {
+                const dashboard = '/dashboard'
+                if (this.$route.path !== dashboard) {
+                    this.$router.push(dashboard).then()
                 }
-                this.$router.push(path0).then(() =>
-                    this.menuOpen = true
-                )
             },
-            toManagerPage() {
-                if (this.kind !== 'manager') {
-                    this.$router.push('/manager').then(() =>
-                        this.menuOpen = true
-                    )
+            onClickMenu(index) {
+                if (this.menuList.length > index) {
+                    if (this.menuIndex !== index) {
+                        const menu = this.menuList[index]
+                        if (menu && menu.children) {
+                            this.menuIndex = index
+                            this.menus = menu.children
+                            this.menuOpen = true
+                        }
+                    } else {
+                        this.menuOpen = !this.menuOpen
+                    }
+                }
+            },
+        },
+        created() {
+            let index = 1
+            let path = '/'
+            const list = this.$route.path.split('/', 2)
+            if (list && list.length > 1) {
+                path += list[1]
+            }
+            for (let i = 0; i < this.menuList.length; i++) {
+                if (this.menuList[i].path === path) {
+                    if (this.menuList[i].children) {
+                        index = i
+                    }
+                    break
                 }
             }
-        },
-        mounted() {
-            if (this.menu) {
-                this.menuOpen = true
-            }
-        },
-        beforeRouteEnter(to, from, next) {
-            let logged = store.getters['user/logged']
-            let pathPermits = store.getters['user/pathPermits']
-            if (logged) {
-                if (pathPermits && pathPermits[to.path]) {
-                    next()
-                } else {
-                    next('/404')
-                }
-            } else {
-                next('/')
-            }
-        },
-        beforeRouteUpdate(to, from, next) {
-            let pathPermits = store.getters['user/pathPermits']
-            if (pathPermits && pathPermits[to.path]) {
-                next()
-            } else {
-                next('/404')
-            }
+
+            this.onClickMenu(index)
         }
     }
 </script>
@@ -289,6 +272,7 @@
 
     .el-tooltip__popper {
         background: $primary !important;
+
         .popper__arrow::after {
             color: $primary !important;
             border-bottom-color: $primary !important;

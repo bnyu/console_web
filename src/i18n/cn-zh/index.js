@@ -5,9 +5,9 @@ export default {
     app: {
         title: '控制台',
         menu: {
-            pm: '产品管理',
-            dev: '配置管理',
-            ops: '运营管理',
+            product: '产品管理',
+            operate: '运营管理',
+            deploy: '部署配置',
             dashboard: '总量',
             userRegister: '用户注册',
             userManage: '用户管理',
@@ -27,6 +27,7 @@ export default {
         },
         act: {
             operation: '操作',
+            loading: '加载中',
             failed: '操作成功',
             success: '操作失败',
             back: '返回',

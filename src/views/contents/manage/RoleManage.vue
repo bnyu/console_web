@@ -97,7 +97,6 @@
 
 <script>
     import api from '@/api/modules/manager'
-    import permits from '@/assets/permit_key'
 
     export default {
         name: "roleManage",
@@ -110,7 +109,7 @@
                 pageSize: 20,
                 maxRoleSize: 100,
                 total: 0,
-                permitList: permits,
+                permitList: [],
                 roleList: [],
                 dataVer: 0
             }

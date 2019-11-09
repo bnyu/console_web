@@ -1,28 +1,32 @@
+import AppLayout from "@/views/layouts/AppLayout"
+import Fallback from '@/views/pages/Fallback'
 import Landing from "@/views/pages/Landing"
-import MLayout from '@/views/layouts/MLayout.vue'
-import Error404 from  '@/views/pages/Error404.vue'
-import Menus from './menus.js'
+import Login from "@/views/pages/Login"
 
-const routes = [
-    {
-        path: '/',
-        component: Landing
-    },
-    {
-        path: '/',
-        component: MLayout,
-        children: Menus
-    },
-    {
-        path: '/user',
-        component: MLayout,
-        children: [
-        ]
-    },
-    {
-        path: '*',
-        component: Error404
-    }
-]
+const base = {
+    path: '/',
+    component: Landing
+}
 
-export default routes
+const login = {
+    path: '/login',
+    component: Login
+}
+
+const content = {
+    path: '/',
+    component: AppLayout,
+    children: [
+        {
+            path: 'temp',
+            component: Fallback,
+        }
+    ] // avoid override
+}
+
+const last = {
+    path: '*',
+    component: Fallback
+}
+
+export {base, login, content, last}

@@ -1,5 +1,5 @@
 <template>
-    <div v-if="!logged" class="login-container">
+    <div class="login-container">
         <el-form ref="loginForm" :model="loginForm" :rules="loginRules" class="login-form" label-position="left">
             <el-form-item prop="username" class="form-line">
                 <el-input
@@ -46,6 +46,7 @@
         name: 'Login',
         data() {
             return {
+                dashboard: '/dashboard',
                 loginForm: {
                     username: '',
                     password: ''
@@ -54,7 +55,6 @@
                     username: [{required: true, trigger: 'blur', message: this.$t('app.notice.inputUsername')}],
                     password: [{required: true, trigger: 'blur', message: this.$t('app.notice.inputPassword')}]
                 },
-                logged: this.$store.getters['user/logged'],
                 loading: false
             }
         },
@@ -66,10 +66,10 @@
                 api.login(username, password).then(data => {
                     const uid = data.uid
                     const token = data.token
-                    const secure = data.secure
-                    this.$store.commit('user/login', {uid, username, token, secure})
-                    this.$store.commit('user/setPermits', data.permits)
-                    this.$router.push('/dashboard').then()
+                    // const secure = data.secure
+                    const permitList = data.permits
+                    this.$store.commit('user/login', {uid, username, token, permitList})
+                    this.$router.push(this.dashboard).then()
                 }).catch(({code, err}) => {
                     if (code === Err.BaseErrorCode.WrongPassword) {
                         this.$message({
@@ -101,11 +101,6 @@
                 })
             }
         },
-        created() {
-            if (this.logged) {
-                this.$router.replace('/dashboard')
-            }
-        }
     }
 </script>
 

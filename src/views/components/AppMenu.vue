@@ -1,7 +1,7 @@
 <template>
     <div v-if="menus">
         <el-menu class="app-menu-bar"
-                 :default-active="enterPath"
+                 :default-active="path"
                  @select="handelRoute"
         >
             <MenuItem v-for="item in menus" :key="item.path"
@@ -20,13 +20,13 @@
             menus: Array[Object]
         },
         computed: {
-            enterPath() {
+            path() {
                 return this.$route.path
             }
         },
         methods: {
             handelRoute(index) {
-                if (this.enterPath !== index) {
+                if (this.path !== index) {
                     this.$router.push(index).then()
                 }
             }

@@ -14,7 +14,7 @@ export default function (config) {
                 }
             } else if (resp.code === Err.BaseErrorCode.LoginExpired) {
                 v.$store.commit('user/logout')
-                v.$router.push('/').then(() => {
+                v.$router.push('/login').then(() => {
                     v.$message({
                         message: v.$t('app.notice.loginExpired'),
                         type: 'warning',

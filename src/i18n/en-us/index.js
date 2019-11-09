@@ -5,9 +5,9 @@ export default {
     app: {
         title: 'Console Web',
         menu: {
-            pm: 'Product Manage',
-            dev: 'Development',
-            ops: 'Operations',
+            product: 'Product Manage',
+            operate: 'Operate',
+            deploy: 'Deploy',
             dashboard: 'Dashboard',
             userRegister: 'User Register',
             userManage: 'User Manage',
@@ -27,6 +27,7 @@ export default {
         },
         act: {
             operation: 'Operation',
+            loading: 'Loading',
             failed: 'Action failed',
             success: 'Action success',
             back: 'Back',

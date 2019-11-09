@@ -1,14 +1,15 @@
 <template>
     <div>
-        <Login/>
+        <GetInfo/>
     </div>
 </template>
 
 <script>
-    import Login from "@/views/user/Login"
+    import GetInfo from "@/views/components/user/GetInfo"
+
     export default {
         name: "Landing",
-        components: {Login}
+        components: {GetInfo}
     }
 </script>
 

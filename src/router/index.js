@@ -1,13 +1,6 @@
-import Vue from 'vue'
-import VueRouter from 'vue-router'
+import {base, login, last} from './routes'
+import newRouter from './router'
 
-import routes from './routes'
+const router = newRouter([base, login, last])
 
-Vue.use(VueRouter)
-
-export default new VueRouter({
-    scrollBehavior: () => ({x: 0, y: 0}),
-    routes,
-    mode: 'history',
-    strict: process.env.NODE_ENV !== 'production'
-})
+export default router

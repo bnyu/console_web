@@ -1,6 +1,6 @@
 import request from '../api'
 
-export default  ({
+export default ({
     login(username, password) {
         return request({
             method: 'POST',
@@ -13,6 +13,14 @@ export default  ({
         return request({
             method: 'POST',
             url: '/logout',
+        })
+    },
+
+    getInfo(token) {
+        return request({
+            method: 'GET',
+            url: '/info',
+            headers: {'X-Token': token}
         })
     },
 

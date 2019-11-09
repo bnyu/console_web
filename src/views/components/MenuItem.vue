@@ -1,5 +1,5 @@
 <template>
-    <div v-if="menu" class="app-menu">
+    <div v-if="menu && !menu.hidden" class="app-menu">
         <el-submenu v-if="menu.children" :index="menu.path">
             <template slot="title">
                 <span class="menu-title submenu-title" :style="styleHeight">
