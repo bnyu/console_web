@@ -1,6 +1,6 @@
 <template>
     <Error404 v-if="uid!==0 && path!=='/temp'"/>
-    <AppLayout v-else v-bind:temp="true">
+    <AppLayout v-else>
         <Restore v-bind:path="path"/>
     </AppLayout>
 </template>

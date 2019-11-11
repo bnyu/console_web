@@ -14,7 +14,7 @@
                     </span>
                     <span class="app-nav" v-show="!navHidden">
                         <span v-for="item in menuList" :key="item.path">
-                            <span v-if="!item.hidden" :class="{ active: item.path === menuPath }">
+                            <span v-if="!item.hidden" :class="{ active: item.path === menuPath1 }">
                                 &nbsp;&nbsp;&nbsp;&nbsp;
                                 <span @click="()=>onClickNav(item.path)" class="app-nav-link">
                                     {{$t(item.name)}}
@@ -64,7 +64,7 @@
         name: "AppLayout",
         components: {UserOption, LangSelector, AppMenu},
         props: {
-            temp: Boolean
+            menuPath: String,
         },
         data() {
             const d = {
@@ -73,12 +73,19 @@
                 menuList: [],
                 navHidden: true,
                 menuOpen: false,
-                menuPath: '',
+                menuPath0: '',
+                menuPath1: '',
                 menus: []
             }
-            if (!this.temp) {
+            if (this.menuPath) {
                 d.allMenus = this.$store.getters['user/menus']
                 d.menuList = this.$store.getters['user/menuList']
+                for (let i = 0; i < d.menuList.length; i++) {
+                    if (!d.menuList[i].hidden) {
+                        d.menuPath0 = d.menuList[i].path
+                        break
+                    }
+                }
             }
             return d
         },
@@ -97,45 +104,36 @@
                     this.$router.push('/dashboard').then()
                 }
             },
-            onClickNav(menuPath) {
-                if (this.menuPath !== menuPath) {
-                    this.changeMenu(menuPath)
+            onClickNav(menuPath1) {
+                if (this.menuPath1 !== menuPath1) {
+                    this.changeMenu(menuPath1)
                 }
             },
-            changeMenu(menuPath) {
-                const menu = this.allMenus[menuPath]
+            changeMenu(menuPath1) {
+                const menu = this.allMenus[menuPath1]
                 if (menu && menu.children) {
-                    this.menuPath = menuPath
+                    this.menuPath1 = menuPath1
                     this.menus = menu.children
                     this.navHidden = !!menu.hidden
                     this.menuOpen = true
+                    return true
                 }
+                return false
             },
-            onRouteChange(path) {
-                let menuPath = '/'
-                const list = path.split('/', 2)
-                if (list && list.length > 1) {
-                    menuPath += list[1]
-                }
-                if (this.menuPath !== menuPath) {
-                    this.changeMenu(menuPath)
-                    if (this.menuPath !== menuPath) {
-                        if (this.menuList.length > 0) {
-                            this.changeMenu(this.menuList[0].path)
-                        }
+            setMenu() {
+                if (this.menuPath && this.menuPath !== this.menuPath1 && !this.changeMenu(this.menuPath)) {
+                    if (this.navHidden && this.menuPath0 !== '') {
+                        this.changeMenu(this.menuPath0)
                     }
                 }
             }
         },
         created() {
-            if (!this.temp) {
-                this.onRouteChange(this.$route.path)
-            }
+            this.setMenu()
         },
-        beforeRouteUpdate(to, from, next) {
-            if (!this.temp) {
-                this.onRouteChange(to.path)
-                next()
+        watch: {
+            menuPath: function () {
+                this.setMenu()
             }
         }
     }
