@@ -1,5 +1,6 @@
 <template>
     <div v-if="menu && !menu.hidden" class="app-menu">
+        <el-divider v-if="level===0"></el-divider>
         <el-submenu v-if="menu.children" :index="menu.path">
             <template slot="title">
                 <span class="menu-title submenu-title" :style="styleHeight">
@@ -49,13 +50,8 @@
     .app-menu {
         .el-submenu__title, .el-menu-item {
             padding: 0 !important;
-            background-color: white !important;
             height: 100% !important;
             line-height: 100% !important;
-
-            &:hover, &:focus {
-                background-color: white !important;
-            }
         }
 
         .el-submenu, .el-menu-item {
@@ -65,13 +61,16 @@
         .el-submenu__icon-arrow {
             display: none !important;
         }
+
+        .el-divider--horizontal {
+            width: 220px;
+            margin: 0 10px;
+        }
     }
 </style>
 
 <style scoped lang="scss">
     .app-menu {
-        $hover-color: #eeeeee;
-        $active-color: #f7f7f7;
 
         .material-icons {
             color: $primary;
@@ -84,8 +83,6 @@
 
         .is-active {
             > div > .menu-title, > .menu-title {
-                background-color: $active-color;
-
                 .menu-icon, .menu-name {
                     color: $positive;
                 }
@@ -98,8 +95,6 @@
 
         .is-opened {
             > div > .menu-title, > .menu-title {
-                background-color: white;
-
                 .menu-icon, .menu-name {
                     color: $primary;
                 }
@@ -123,10 +118,6 @@
             border-radius: 12px;
             width: 240px;
             height: 100%;
-
-            &:hover, &:focus {
-                background-color: $hover-color !important;
-            }
         }
 
         .submenu-title {

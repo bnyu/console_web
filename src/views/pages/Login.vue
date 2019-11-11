@@ -46,7 +46,7 @@
         name: 'Login',
         data() {
             return {
-                dashboard: '/dashboard',
+                from: this.$route.query.from,
                 loginForm: {
                     username: '',
                     password: ''
@@ -69,7 +69,11 @@
                     // const secure = data.secure
                     const permitList = data.permits
                     this.$store.commit('user/login', {uid, username, token, permitList})
-                    this.$router.push(this.dashboard).then()
+                    if (this.from) {
+                        this.$router.replace(this.from).then()
+                    } else {
+                        this.$router.replace('/').then()
+                    }
                 }).catch(({code, err}) => {
                     if (code === Err.BaseErrorCode.WrongPassword) {
                         this.$message({
@@ -111,7 +115,7 @@
         flex-direction: column;
         align-self: center;
         width: 100%;
-        background-color: #354459;
+        background-color: $second;
         overflow: hidden;
         top: 0;
         bottom: 0;

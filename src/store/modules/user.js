@@ -8,7 +8,8 @@ const state = {
     username: '',
     token: '',
     permitList: [],
-    menuList: []
+    menuList: [],
+    menus: {}
 }
 
 const getters = {
@@ -21,6 +22,9 @@ const getters = {
         } else {
             return Cookies.get('u-name')
         }
+    },
+    menus: state => {
+        return state.menus
     },
     menuList: state => {
         return state.menuList
@@ -40,8 +44,8 @@ const mutations = {
         state.username = ''
         state.token = ''
         state.permitList = []
-        state.menuList = []
         state.menuList = getMenusAndRoutes([], [])
+        state.menus = {}
         http.defaults.headers.common['X-Token'] = ''
         Cookies.remove('u-name')
         Cookies.remove('x-token')
@@ -52,6 +56,9 @@ const mutations = {
         state.token = token
         state.permitList = permitList
         state.menuList = getMenusAndRoutes(menus, permitList)
+        for (let menu of state.menuList) {
+            state.menus[menu.path] = menu
+        }
         http.defaults.headers.common['X-Token'] = token
         Cookies.set('u-name', username, {expires: 1})
         Cookies.set('x-token', token, {expires: 1})

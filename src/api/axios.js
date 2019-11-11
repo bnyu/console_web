@@ -3,7 +3,7 @@ import axios from 'axios'
 
 const axiosInstance = axios.create({
     baseURL: process.env.VUE_APP_API_URL,
-    timeout: 6000,
+    timeout: 10000,
 })
 
 Vue.prototype.$axios = axiosInstance

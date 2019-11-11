@@ -3,6 +3,7 @@
         <el-menu class="app-menu-bar"
                  :default-active="path"
                  @select="handelRoute"
+                 background-color="#eeeeee"
         >
             <MenuItem v-for="item in menus" :key="item.path"
                       v-bind:menu="item" v-bind:level="0"/>
@@ -37,7 +38,7 @@
 <style scoped lang="scss">
     .app-menu-bar {
         border-right: hidden;
-        background-color: white;
+        background-color: #cccccc;
 
         @include no-select;
     }

@@ -1,10 +1,12 @@
 $primary: #3D6090;
+$second: #354459;
 $positive: #66a1f1;
 $success: #4A9920;
 $warning: #CB8820;
 $danger: #D75050;
 $info: #828490;
-$space: #f8f8f8;
+
+$second-0: rgba(53, 68, 89, 0.14);
 
 @mixin no-select {
   -webkit-user-select: none;

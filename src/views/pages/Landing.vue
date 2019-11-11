@@ -1,18 +1,20 @@
 <template>
-    <div>
-        <GetInfo/>
+    <div class="cc">
+        <Restore v-bind:path="'/'"/>
     </div>
 </template>
 
 <script>
-    import GetInfo from "@/views/components/user/GetInfo"
+    import Restore from "@/views/components/Restore"
 
     export default {
         name: "Landing",
-        components: {GetInfo}
+        components: {Restore}
     }
 </script>
 
-<style scoped>
-
+<style scoped lang="scss">
+    .cc {
+        background-color: $second;
+    }
 </style>

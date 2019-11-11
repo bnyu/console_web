@@ -1,7 +1,8 @@
-import AppLayout from "@/views/layouts/AppLayout"
+import Content from "@/views/pages/Content"
 import Fallback from '@/views/pages/Fallback'
 import Landing from "@/views/pages/Landing"
 import Login from "@/views/pages/Login"
+import Dashboard from "@/views/contents/Dashboard"
 
 const base = {
     path: '/',
@@ -13,15 +14,22 @@ const login = {
     component: Login
 }
 
+/* avoid override by content */
+const temp = {
+    path: '/temp',
+    component: Fallback
+}
+
 const content = {
     path: '/',
-    component: AppLayout,
+    component: Content,
+    redirect: 'dashboard',
     children: [
         {
-            path: 'temp',
-            component: Fallback,
+            path: 'dashboard',
+            component: Dashboard,
         }
-    ] // avoid override
+    ]
 }
 
 const last = {
@@ -29,4 +37,4 @@ const last = {
     component: Fallback
 }
 
-export {base, login, content, last}
+export {base, login, temp, content, last}

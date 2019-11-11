@@ -1,11 +1,3 @@
-const dashboard = {
-    hidden: true,
-    name: 'app.menu.dashboard',
-    icon: 'dashboard',
-    path: 'dashboard',
-    component: 'Dashboard.vue',
-}
-
 const deploy = {
     name: 'app.menu.deploy',
     path: 'deploy',
@@ -117,4 +109,16 @@ const manage = {
     ]
 }
 
-export default [dashboard, product, operate, deploy, manage]
+const user = {
+    hidden: true,
+    path: 'user',
+    children: [
+        {
+            name: 'app.menu.changePassword',
+            path: 'info',
+            component: 'user/ChangePassword.vue'
+        }
+    ]
+}
+
+export default [product, operate, deploy, manage, user]

@@ -1,6 +1,6 @@
 import router from './index'
 import newRouter from './router'
-import {base, content, last} from './routes'
+import {login, base, temp, content, last} from './routes'
 
 const getMenusAndRoutes = (menuList, permitList) => {
     let ps = {}
@@ -40,9 +40,9 @@ const getMenusAndRoutes = (menuList, permitList) => {
         if (contentRoutes.length > 0) {
             router.matcher = newRouter([]).matcher
             const children = [...content.children, ...contentRoutes]
-            router.addRoutes([{...content, children, redirect: contentRoutes[0].path}, last])
+            router.addRoutes([temp, {...content, children}, last])
         } else {
-            router.matcher = newRouter([base, last]).matcher
+            router.matcher = newRouter([base, login, last]).matcher
         }
     }
 

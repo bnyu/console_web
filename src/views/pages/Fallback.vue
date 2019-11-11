@@ -1,28 +1,25 @@
 <template>
-    <div v-if="uid!==0">
-        <Error404/>
-    </div>
-    <div v-else>
-        <GetInfo/>
-    </div>
+    <Error404 v-if="uid!==0 && path!=='/temp'"/>
+    <AppLayout v-else v-bind:temp="true">
+        <Restore v-bind:path="path"/>
+    </AppLayout>
 </template>
 
 <script>
     import Error404 from "@/views/components/Error404"
-    import GetInfo from "@/views/components/user/GetInfo"
+    import Restore from "@/views/components/Restore"
+    import AppLayout from "@/views/layouts/AppLayout"
 
     export default {
         name: "Fallback",
-        components: {GetInfo, Error404},
-        data() {
-            return {
-                enterPath: this.$route.fullPath,
-                uid: this.$store.getters['user/uid']
+        components: {AppLayout, Restore, Error404},
+        computed: {
+            path() {
+                return this.$route.fullPath
+            },
+            uid() {
+                return this.$store.getters['user/uid']
             }
         }
     }
 </script>
-
-<style scoped>
-
-</style>

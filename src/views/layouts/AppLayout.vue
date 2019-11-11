@@ -3,7 +3,7 @@
         <el-container>
             <el-header class="app-header" height="60px">
                 <div class="app-header-side">
-                    <el-button v-show="menus" type="text" @click="menuOpen=!menuOpen">
+                    <el-button type="text" @click="menuOpen=!menuOpen">
                         <i v-if="menuOpen" class="material-icons">menu_open</i>
                         <i v-else class="material-icons">menu</i>
                     </el-button>
@@ -12,11 +12,11 @@
                             {{$t('app.title')}}
                         </span>
                     </span>
-                    <span class="app-nav">
-                        <span v-for="(item, index) in menuList" :key="index">
-                            <span v-if="!item.hidden" :class="{ active: index === menuIndex }">
+                    <span class="app-nav" v-show="!navHidden">
+                        <span v-for="item in menuList" :key="item.path">
+                            <span v-if="!item.hidden" :class="{ active: item.path === menuPath }">
                                 &nbsp;&nbsp;&nbsp;&nbsp;
-                                <span @click="()=>onClickMenu(index)" class="app-nav-link">
+                                <span @click="()=>onClickNav(item.path)" class="app-nav-link">
                                     {{$t(item.name)}}
                                 </span>
                             </span>
@@ -45,7 +45,7 @@
                     <el-scrollbar style="height: 100%">
                         <div class="content">
                             <transition name="fade" mode="out-in">
-                                <router-view/>
+                                <slot></slot>
                             </transition>
                         </div>
                     </el-scrollbar>
@@ -63,14 +63,24 @@
     export default {
         name: "AppLayout",
         components: {UserOption, LangSelector, AppMenu},
+        props: {
+            temp: Boolean
+        },
         data() {
-            return {
-                menuOpen: false,
-                menuIndex: -1,
-                menus: [],
-                menuList: this.$store.getters['user/menuList'],
+            const d = {
                 username: this.$store.getters['user/username'],
+                allMenus: {},
+                menuList: [],
+                navHidden: true,
+                menuOpen: false,
+                menuPath: '',
+                menus: []
             }
+            if (!this.temp) {
+                d.allMenus = this.$store.getters['user/menus']
+                d.menuList = this.$store.getters['user/menuList']
+            }
+            return d
         },
         computed: {
             contentClass() {
@@ -83,43 +93,50 @@
         },
         methods: {
             onClickTitle() {
-                const dashboard = '/dashboard'
-                if (this.$route.path !== dashboard) {
-                    this.$router.push(dashboard).then()
+                if (this.$route.path !== '/dashboard') {
+                    this.$router.push('/dashboard').then()
                 }
             },
-            onClickMenu(index) {
-                if (this.menuList.length > index) {
-                    if (this.menuIndex !== index) {
-                        const menu = this.menuList[index]
-                        if (menu && menu.children) {
-                            this.menuIndex = index
-                            this.menus = menu.children
-                            this.menuOpen = true
+            onClickNav(menuPath) {
+                if (this.menuPath !== menuPath) {
+                    this.changeMenu(menuPath)
+                }
+            },
+            changeMenu(menuPath) {
+                const menu = this.allMenus[menuPath]
+                if (menu && menu.children) {
+                    this.menuPath = menuPath
+                    this.menus = menu.children
+                    this.navHidden = !!menu.hidden
+                    this.menuOpen = true
+                }
+            },
+            onRouteChange(path) {
+                let menuPath = '/'
+                const list = path.split('/', 2)
+                if (list && list.length > 1) {
+                    menuPath += list[1]
+                }
+                if (this.menuPath !== menuPath) {
+                    this.changeMenu(menuPath)
+                    if (this.menuPath !== menuPath) {
+                        if (this.menuList.length > 0) {
+                            this.changeMenu(this.menuList[0].path)
                         }
-                    } else {
-                        this.menuOpen = !this.menuOpen
                     }
                 }
-            },
+            }
         },
         created() {
-            let index = 1
-            let path = '/'
-            const list = this.$route.path.split('/', 2)
-            if (list && list.length > 1) {
-                path += list[1]
+            if (!this.temp) {
+                this.onRouteChange(this.$route.path)
             }
-            for (let i = 0; i < this.menuList.length; i++) {
-                if (this.menuList[i].path === path) {
-                    if (this.menuList[i].children) {
-                        index = i
-                    }
-                    break
-                }
+        },
+        beforeRouteUpdate(to, from, next) {
+            if (!this.temp) {
+                this.onRouteChange(to.path)
+                next()
             }
-
-            this.onClickMenu(index)
         }
     }
 </script>
@@ -167,7 +184,7 @@
 
             .app-title {
                 max-width: 180px;
-                padding-left: 20px;
+                padding-left: 24px;
                 padding-right: 60px;
 
                 &-text {
@@ -208,7 +225,7 @@
         &-aside {
             @include scrollbar;
             z-index: 100;
-            background-color: white;
+            background-color: #eeeeee;
             border-right: 1px solid rgba(0, 0, 0, 0.2);
             width: 240px;
 
@@ -222,11 +239,12 @@
         &-content {
             @include scrollbar;
             z-index: 99;
-            background-color: $space;
+            background-color: white;
             width: 100%;
             transition: all .3s ease;
 
             .content {
+                position: relative;
                 display: flex;
                 flex-direction: row;
                 justify-content: center;

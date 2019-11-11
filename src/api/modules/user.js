@@ -20,7 +20,8 @@ export default ({
         return request({
             method: 'GET',
             url: '/info',
-            headers: {'X-Token': token}
+            headers: {'X-Token': token},
+            timeout: 5000,
         })
     },
 
