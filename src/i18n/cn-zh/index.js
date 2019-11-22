@@ -12,6 +12,7 @@ export default {
             userRegister: '用户注册',
             userManage: '用户管理',
             roleManage: '角色管理',
+            changePassword: '修改密码',
 
             bulletin: '公告',
             bulletinPost: '发布新公告',
@@ -51,6 +52,8 @@ export default {
             newPassword: '新密码',
             changePassword: '修改密码',
             username: '用户名',
+            manage: '用户管理',
+            info: '个人中心',
             roleList: '角色列表',
             roleName: '角色名称',
             permitList: '权限列表',

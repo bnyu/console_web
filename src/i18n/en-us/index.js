@@ -12,6 +12,7 @@ export default {
             userRegister: 'User Register',
             userManage: 'User Manage',
             roleManage: 'Role Manage',
+            changePassword: 'Change Password',
 
             bulletin: 'Bulletin',
             bulletinPost: 'Post New',
@@ -51,6 +52,8 @@ export default {
             newPassword: 'New Password',
             changePassword: 'Change Password',
             username: 'Username',
+            manage: 'User Management',
+            info: 'My Info',
             roleList: 'Role List',
             roleName: 'Role Name',
             permitList: 'Permit List',

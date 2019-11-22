@@ -1,7 +1,7 @@
 <template>
-    <div>
+    <div class="app">
         <el-container>
-            <el-header class="app-header" height="60px">
+            <el-header class="app-header">
                 <div class="app-header-side">
                     <el-button type="text" @click="menuOpen=!menuOpen">
                         <i v-if="menuOpen" class="material-icons">menu_open</i>
@@ -140,9 +140,11 @@
 </script>
 
 <style scoped lang="scss">
-    .app {
-        min-width: 400px;
+    $aside-width: 240px;
+    $header-height: 60px;
+    $content-min-width: 400px;
 
+    .app {
         &-header {
             @include no-select;
             display: flex;
@@ -151,7 +153,7 @@
             align-content: center;
             align-items: center;
             background-color: $primary;
-            height: 60px !important;
+            height: $header-height !important;
             box-shadow: 0 2px 4px #aaaab4;
 
             .app-nav {
@@ -225,7 +227,7 @@
             z-index: 100;
             background-color: #eeeeee;
             border-right: 1px solid rgba(0, 0, 0, 0.2);
-            width: 240px;
+            width: $aside-width;
 
             .app-menu-list {
                 display: flex;
@@ -244,8 +246,15 @@
             .content {
                 position: relative;
                 display: flex;
-                flex-direction: row;
-                justify-content: center;
+                flex-direction: column;
+                justify-content: flex-start;
+                align-items: center;
+                $blank: 10px;
+                padding-top: $blank;
+                padding-bottom: $blank;
+                $blank-height: $header-height + 3 * $blank;
+                min-height: calc(100vh - #{$blank-height});
+                min-width: $content-min-width;
             }
         }
     }
@@ -271,19 +280,19 @@
     }
 
     .slide-enter, .slide-leave-to {
-        margin-left: -240px;
+        margin-left: - $aside-width;
     }
 
     .right-slide {
-        padding-left: 240px;
-        width: calc(100% - 240px);
+        padding-left: $aside-width;
+        width: calc(100% - #{$aside-width});
         transition: all .3s ease;
     }
 </style>
 
 <style lang="scss">
     .el-scrollbar__wrap {
-        overflow-x: hidden !important;
+        overflow-x: auto !important;
     }
 
     .el-tooltip__popper {

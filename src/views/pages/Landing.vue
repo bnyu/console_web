@@ -15,6 +15,6 @@
 
 <style scoped lang="scss">
     .cc {
-        background-color: $second;
+        background-color: $second-0;
     }
 </style>
