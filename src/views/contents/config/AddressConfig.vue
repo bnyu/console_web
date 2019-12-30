@@ -1,12 +1,12 @@
 <template>
-  <div>
-    Address Config
-  </div>
+  <ContentLayout :title="'app.menu.configAddress'"></ContentLayout>
 </template>
 
 <script>
+import ContentLayout from "@/views/layouts/ContentLayout"
 export default {
-  name: 'AddressConfig'
+  name: 'AddressConfig',
+    components: {ContentLayout}
 }
 </script>
 

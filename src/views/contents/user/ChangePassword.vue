@@ -1,27 +1,30 @@
 <template>
-    <div class="ch-pw">
-        <el-form label-position="left" label-width="100px" :model="form" ref="form" :rules="rules">
+    <ContentLayout v-bind:title="'app.menu.changePassword'">
+        <el-form label-position="right" label-width="80px" :model="form" ref="form" :rules="rules">
             <el-form-item :label="$t('app.user.password')" prop="password" class="pw-input">
-                <el-input v-model="form.password" autocomplete="off" type="password" show-password></el-input>
+                <el-input size="small" v-model="form.password" autocomplete="off" type="password" show-password></el-input>
             </el-form-item>
             <el-form-item :label="$t('app.user.newPassword')" prop="newPassword" class="pw-input">
-                <el-input v-model="form.newPassword" autocomplete="off" type="password" show-password></el-input>
+                <el-input size="small" v-model="form.newPassword" autocomplete="off" type="password" show-password></el-input>
             </el-form-item>
             <el-form-item :label="$t('app.user.newPassword')" prop="repeatNewPassword" class="pw-input">
-                <el-input v-model="form.repeatNewPassword" autocomplete="off" type="password" show-password></el-input>
+                <el-input size="small" v-model="form.repeatNewPassword" autocomplete="off" type="password"
+                          show-password></el-input>
             </el-form-item>
             <el-form-item>
-                <el-button type="primary" @click="handleChangePassword">{{$t('app.act.confirm')}}</el-button>
+                <el-button size="small" type="primary" @click="handleChangePassword">{{$t('app.act.confirm')}}</el-button>
             </el-form-item>
         </el-form>
-    </div>
+    </ContentLayout>
 </template>
 
 <script>
     import api from '@/api/modules/user'
+    import ContentLayout from "@/views/layouts/ContentLayout"
 
     export default {
         name: "ChangePassword",
+        components: {ContentLayout},
         data() {
             const validatePass1 = (rule, value, callback) => {
                 if (value === '') {
@@ -113,14 +116,8 @@
 </script>
 
 <style scoped lang="scss">
-    .ch-pw {
-        align-self: flex-start;
-        padding-top: 10px;
-        padding-left: 20px;
-        .pw-input {
-            padding-top: 4px;
-            width: calc(100vw - 300px);
-            min-width: 200px;
-        }
+    .pw-input {
+        padding-top: 4px;
+        max-width: 500px;
     }
 </style>

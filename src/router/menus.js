@@ -29,7 +29,7 @@ const getMenusAndRoutes = (menuList, permitList) => {
             }
         } else if (!menu.permit || ps[menu.permit]) {
             const item = {name: menu.name, icon: menu.icon, path: fPath, path0: fPath, hidden: menu.hidden}
-            const route = {path: item.path, component: () => import(`@/views/contents/${menu.component}`)}
+            const route = {name: menu.name, path: item.path, component: () => import(`@/views/contents/${menu.component}`)}
             menuRouterList.push(route)
             return item
         }

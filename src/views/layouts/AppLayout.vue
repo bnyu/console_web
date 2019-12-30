@@ -36,19 +36,15 @@
             <el-main class="app-main">
                 <transition name="slide">
                     <div class="app-aside" v-show="menuOpen">
-                        <el-scrollbar style="height: 100%">
-                            <AppMenu class="app-menu-list" v-bind:menus="menus"/>
-                        </el-scrollbar>
+                        <AppMenu class="app-menu-list" v-bind:menus="menus"/>
                     </div>
                 </transition>
                 <div :class="'app-content' + contentClass">
-                    <el-scrollbar style="height: 100%">
-                        <div class="content">
-                            <transition name="fade" mode="out-in">
-                                <slot></slot>
-                            </transition>
-                        </div>
-                    </el-scrollbar>
+                    <div class="content">
+                        <transition name="fade" mode="out-in">
+                            <slot></slot>
+                        </transition>
+                    </div>
                 </div>
             </el-main>
         </el-container>
@@ -142,7 +138,6 @@
 <style scoped lang="scss">
     $aside-width: 240px;
     $header-height: 60px;
-    $content-min-width: 400px;
 
     .app {
         &-header {
@@ -154,7 +149,8 @@
             align-items: center;
             background-color: $primary;
             height: $header-height !important;
-            box-shadow: 0 2px 4px #aaaab4;
+            box-shadow: 0 3px 4px #9c9ca5;
+            z-index: 100;
 
             .app-nav {
                 &-link {
@@ -209,25 +205,45 @@
         }
 
         &-main {
-            padding: 4px 0 0;
+            padding: 0;
             display: flex;
             flex-direction: row;
-            justify-content: flex-start;
         }
 
         @mixin scrollbar {
-            position: absolute;
-            top: 64px;
+            position: fixed;
+            top: $header-height;
             bottom: 0;
-            height: calc(100% - 64px);
+            height: calc(100% - #{$header-height});
+            overflow-x: hidden;
+            overflow-y: auto;
+            &::-webkit-scrollbar {
+                width: 12px;
+            }
+
+            &::-webkit-scrollbar-track {
+                border-radius: 4px;
+                background-color: #eaeaea;
+            }
+
+            &::-webkit-scrollbar-thumb {
+                border-radius: 4px;
+                background: #a0a0a0;
+            }
+            scrollbar-color: #a0a0a0 #eaeaea;
         }
 
         &-aside {
             @include scrollbar;
-            z-index: 100;
-            background-color: #eeeeee;
-            border-right: 1px solid rgba(0, 0, 0, 0.2);
+
+            &::-webkit-scrollbar {
+                width: 6px;
+            }
+
+            z-index: 99;
             width: $aside-width;
+            background-color: #eeeeee;
+            box-shadow: 1px 2px 3px #aaaab4;
 
             .app-menu-list {
                 display: flex;
@@ -238,7 +254,7 @@
 
         &-content {
             @include scrollbar;
-            z-index: 99;
+            z-index: 98;
             background-color: white;
             width: 100%;
             transition: all .3s ease;
@@ -249,18 +265,12 @@
                 flex-direction: column;
                 justify-content: flex-start;
                 align-items: center;
-                $blank: 10px;
-                padding-top: $blank;
-                padding-bottom: $blank;
-                $blank-height: $header-height + 3 * $blank;
-                min-height: calc(100vh - #{$blank-height});
-                min-width: $content-min-width;
             }
         }
     }
 
     .fade-enter-active {
-        transition: all .3s ease;
+        transition: all .2s ease;
     }
 
     .fade-leave-active {
@@ -271,11 +281,7 @@
         opacity: 0;
     }
 
-    .slide-enter-active {
-        transition: all .3s ease;
-    }
-
-    .slide-leave-active {
+    .slide-enter-active, .slide-leave-active {
         transition: all .3s ease;
     }
 
@@ -286,21 +292,5 @@
     .right-slide {
         padding-left: $aside-width;
         width: calc(100% - #{$aside-width});
-        transition: all .3s ease;
-    }
-</style>
-
-<style lang="scss">
-    .el-scrollbar__wrap {
-        overflow-x: auto !important;
-    }
-
-    .el-tooltip__popper {
-        background: $primary !important;
-
-        .popper__arrow::after {
-            color: $primary !important;
-            border-bottom-color: $primary !important;
-        }
     }
 </style>

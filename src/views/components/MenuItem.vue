@@ -1,18 +1,18 @@
 <template>
     <div v-if="menu && !menu.hidden" class="app-menu">
-        <el-divider v-if="level===0"></el-divider>
+        <el-divider v-if="level===0&&index!==0"></el-divider>
         <el-submenu v-if="menu.children" :index="menu.path">
             <template slot="title">
                 <span class="menu-title submenu-title" :style="styleHeight">
-                        <span>
-                            <i class="menu-icon material-icons" :style="stylePadding">{{menu.icon}}</i>
-                            <span class="menu-name">{{$t(menu.name)}}</span>
-                        </span>
-                        <i class="menu-open material-icons">keyboard_arrow_down</i>
+                    <span>
+                        <i class="menu-icon material-icons" :style="stylePadding">{{menu.icon}}</i>
+                        <span class="menu-name">{{$t(menu.name)}}</span>
+                    </span>
+                    <span class="menu-open"><i class="material-icons">keyboard_arrow_down</i></span>
                 </span>
             </template>
-            <MenuItem v-for="item in menu.children" :key="item.path"
-                      v-bind:menu="item" v-bind:level="level + 1"
+            <MenuItem v-for="(item, index) in menu.children" :key="item.path"
+                      v-bind:menu="item" v-bind:level="level + 1" v-bind:index="index"
             />
         </el-submenu>
         <el-menu-item v-else :index="menu.path">
@@ -30,6 +30,7 @@
     export default {
         name: "MenuItem",
         props: {
+            index: Number,
             menu: Object,
             level: Number
         },
@@ -117,6 +118,7 @@
             align-items: center;
             border-radius: 12px;
             width: 240px;
+            padding-left: 2px;
             height: 100%;
         }
 
@@ -125,7 +127,7 @@
 
             .menu-open {
                 color: $primary;
-                padding-right: 6px;
+                padding-right: 10px;
                 transition: transform .3s;
             }
         }

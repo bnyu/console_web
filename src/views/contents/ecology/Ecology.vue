@@ -1,10 +1,12 @@
 <template>
-    <div>Ecology</div>
+    <ContentLayout :title="'app.menu.ecology'"></ContentLayout>
 </template>
 
 <script>
+    import ContentLayout from "@/views/layouts/ContentLayout"
     export default {
-        name: "Ecology"
+        name: "Ecology",
+        components: {ContentLayout}
     }
 </script>
 

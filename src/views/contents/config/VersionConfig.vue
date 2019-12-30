@@ -1,13 +1,13 @@
 <template>
-  <div>
-    Version Config
-  </div>
+  <ContentLayout :title="'app.menu.configVersion'"></ContentLayout>
 </template>
 
 <script>
+import ContentLayout from "@/views/layouts/ContentLayout"
 export default {
   name: 'Version' +
-    'Config'
+    'Config',
+    components: {ContentLayout}
 }
 </script>
 

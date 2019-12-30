@@ -1,12 +1,12 @@
 <template>
-  <div>
-    Function Config
-  </div>
+  <ContentLayout :title="'app.menu.configFunction'"></ContentLayout>
 </template>
 
 <script>
+import ContentLayout from "@/views/layouts/ContentLayout"
 export default {
-  name: 'FunctionConfig'
+  name: 'FunctionConfig',
+    components: {ContentLayout}
 }
 </script>
 

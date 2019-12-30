@@ -5,8 +5,8 @@
                  @select="handelRoute"
                  background-color="#eeeeee"
         >
-            <MenuItem v-for="item in menus" :key="item.path"
-                      v-bind:menu="item" v-bind:level="0"/>
+            <MenuItem v-for="(item, index) in menus" :key="item.path"
+                      v-bind:menu="item" v-bind:level="0" v-bind:index="index"/>
         </el-menu>
     </div>
 </template>

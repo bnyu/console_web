@@ -1,12 +1,12 @@
 <template>
-    <div>
-      System Email
-    </div>
+    <ContentLayout :title="'app.menu.email'"></ContentLayout>
 </template>
 
 <script>
+import ContentLayout from "@/views/layouts/ContentLayout"
 export default {
-  name: 'SystemEmail'
+  name: 'SystemEmail',
+    components: {ContentLayout}
 }
 </script>
 

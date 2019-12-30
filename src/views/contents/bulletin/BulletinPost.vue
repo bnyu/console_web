@@ -1,12 +1,12 @@
 <template>
-  <div>
-     Bulletin Post
-  </div>
+    <ContentLayout :title="'app.menu.bulletinPost'"></ContentLayout>
 </template>
 
 <script>
+import ContentLayout from "@/views/layouts/ContentLayout"
 export default {
-  name: 'BulletinPost'
+  name: 'BulletinPost',
+    components: {ContentLayout}
 }
 </script>
 

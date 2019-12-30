@@ -1,12 +1,12 @@
 <template>
-    <div>
-      Server List
-    </div>
+    <ContentLayout :title="'app.menu.serverList'"></ContentLayout>
 </template>
 
 <script>
+import ContentLayout from "@/views/layouts/ContentLayout"
 export default {
-  name: 'ServerList'
+  name: 'ServerList',
+    components: {ContentLayout}
 }
 </script>
 

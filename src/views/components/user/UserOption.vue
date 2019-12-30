@@ -21,6 +21,7 @@
                 :title="$t('app.user.logout')"
                 :visible.sync="logoutVisible"
                 width="30%"
+                :append-to-body="true"
         >
             <span>{{$t('app.user.logout')}}</span>
             <span slot="footer" class="dialog-footer">
