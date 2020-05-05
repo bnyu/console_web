@@ -9,7 +9,7 @@
                 <div v-for="item in roleList" :key="item.role_id">
                     <el-checkbox :label="item.role_id" class="role-name">{{item.role_name}}</el-checkbox>
                     <div class="permit-list">
-                        <el-tag class="permit-tag" v-for="permit in item.permit_list" :key="permit">{{$t('app.permit.'+permit)}}</el-tag>
+                        <el-tag class="permit-tag" v-for="permit in item.permit_list" :key="permit">{{$t('permit.'+permit)}}</el-tag>
                     </div>
                 </div>
             </el-checkbox-group>

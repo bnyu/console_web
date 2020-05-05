@@ -14,7 +14,7 @@
         <el-form-item prop="permits" :label="$t('app.user.permitList')" class="m-add-input">
             <el-checkbox-group v-model="form.permits" size="small" class="permit-list">
                 <el-checkbox v-for="item in permitList" :key="item" :label="item" border class="permit-key">
-                    {{$t('app.permit.'+item)}}
+                    {{$t('permit.'+item)}}
                 </el-checkbox>
             </el-checkbox-group>
         </el-form-item>
@@ -29,7 +29,7 @@
 </template>
 
 <script>
-    import permit_key from "@/assets/permit_key"
+    import permitList from "@/router/permit_list/index"
     import api from '@/api/modules/manager'
 
     export default {
@@ -56,7 +56,7 @@
                     name: '',
                     permits: []
                 },
-                permitList: permit_key,
+                permitList: permitList,
                 rules: {
                     name: [
                         {required: true, validator: validateName, trigger: 'blur'}

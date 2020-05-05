@@ -1,5 +1,5 @@
 <template>
-  <ContentLayout :title="'app.menu.configAddress'"></ContentLayout>
+  <ContentLayout :title="'menu.configAddress'"></ContentLayout>
 </template>
 
 <script>

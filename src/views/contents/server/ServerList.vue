@@ -1,5 +1,5 @@
 <template>
-    <ContentLayout :title="'app.menu.serverList'"></ContentLayout>
+    <ContentLayout :title="'menu.serverList'"></ContentLayout>
 </template>
 
 <script>

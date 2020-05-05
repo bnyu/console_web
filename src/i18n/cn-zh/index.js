@@ -1,13 +1,12 @@
 import elementCnLocale from 'element-ui/lib/locale/lang/zh-CN'// element-ui lang
+import content from "./content"
 
 export default {
     ...elementCnLocale,
+    ...content,
     app: {
         title: '控制台',
         menu: {
-            product: '产品管理',
-            operate: '运营管理',
-            deploy: '部署配置',
             dashboard: '总览',
             userRegister: '用户注册',
             userManage: '用户管理',
@@ -19,18 +18,6 @@ export default {
             roleAdd: '添加角色',
             roleEdit: '角色编辑',
             changePassword: '修改密码',
-
-            bulletin: '公告',
-            bulletinPost: '发布新公告',
-            bulletinList: '公告列表',
-            server: '游戏服务器',
-            serverList: '服务器列表',
-            email: '系统邮件',
-            config: '参数配置',
-            configVersion: '版本设置',
-            configFunction: '功能设置',
-            configAddress: '地址设置',
-            ecology: '生态监控'
         },
         act: {
             operation: '操作',
@@ -50,7 +37,7 @@ export default {
             save: '保存',
             next: '下一步',
             reset: '重置',
-            clear: '清除'
+            clear: '清除',
         },
         user: {
             login: '登录',
@@ -88,7 +75,7 @@ export default {
             addNewRole: '添加新角色',
             addNewRoleSuccess: '添加新角色成功',
             inputRoleName: '请输入角色名',
-            roleAlreadyExist:'此角色已存在',
+            roleAlreadyExist: '此角色已存在',
             selectPermits: '请选择权限',
             deleteUserSuccess: '删除用户成功',
             deleteRoleSuccess: '删除角色成功',
@@ -97,16 +84,6 @@ export default {
             userNotExist: '用户不存在',
             roleNotExist: '角色不存在',
             loginExpired: '登录超时',
-        },
-        permit: {
-            config_address: "地址设置",
-            config_function: "功能配置",
-            config_version: "版本配置",
-            ecology: "生态监控",
-            post_bulletin: "发布新公告",
-            send_email: "发送系统邮件",
-            view_bulletin: "查看公告列表",
-            view_server_list: "查看服务器列表"
         },
         username: '用户名',
         password: '密码',

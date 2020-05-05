@@ -3,7 +3,6 @@ import VueI18n from 'vue-i18n'
 
 import enUS from './en-us'
 import cnZH from './cn-zh'
-import jpJA from './jp-ja'
 
 Vue.use(VueI18n)
 
@@ -14,9 +13,6 @@ const messages = {
     'cn': cnZH,
     'cn-zh': cnZH,
     'zh-cn': cnZH,
-    'jp': jpJA,
-    'jp-ja': jpJA,
-    'ja-jp': jpJA
 }
 
 const defaultLang = 'en'

@@ -1,13 +1,12 @@
 import elementEnLocale from 'element-ui/lib/locale/lang/en' // element-ui lang
+import content from "./content"
 
 export default {
     ...elementEnLocale,
+    ...content,
     app: {
         title: 'Console Web',
         menu: {
-            product: 'Product Manage',
-            operate: 'Operate',
-            deploy: 'Deploy',
             dashboard: 'Dashboard',
             userRegister: 'User Register',
             userManage: 'User Manage',
@@ -19,18 +18,6 @@ export default {
             roleAdd: 'Add Role',
             roleEdit: 'Edit Role',
             changePassword: 'Change Password',
-
-            bulletin: 'Bulletin',
-            bulletinPost: 'Post New',
-            bulletinList: 'View List',
-            server: 'Game Server',
-            serverList: 'Server List',
-            email: 'System Email',
-            config: 'Arg Config',
-            configVersion: 'Version',
-            configFunction: 'Functions',
-            configAddress: 'URL Address',
-            ecology: 'Ecology'
         },
         act: {
             operation: 'Operation',
@@ -50,7 +37,7 @@ export default {
             save: 'Save',
             next: 'Next',
             reset: 'Reset',
-            clear: 'Clear'
+            clear: 'Clear',
         },
         user: {
             login: 'Login',
@@ -88,7 +75,7 @@ export default {
             addNewRole: 'Add new role',
             addNewRoleSuccess: 'Add new role success',
             inputRoleName: 'Please input role name',
-            roleAlreadyExist:'This role already exist',
+            roleAlreadyExist: 'This role already exist',
             selectPermits: 'Please select permits',
             deleteUserSuccess: 'Delete User Success',
             deleteRoleSuccess: 'Delete User Success',
@@ -96,17 +83,7 @@ export default {
             userAlreadyDelete: 'The user already deleted',
             userNotExist: 'User not exist',
             roleNotExist: 'Role not exist',
-            loginExpired: 'Login Expired',
-        },
-        permit: {
-            config_address: "config address",
-            config_function: "config function",
-            config_version: "config version",
-            ecology: "ecology",
-            post_bulletin: "post bulletin",
-            send_email: "send email",
-            view_bulletin: "view bulletin",
-            view_server_list: "view server list"
+            loginExpired: 'Login expired',
         },
         username: 'Username',
         password: 'Password',

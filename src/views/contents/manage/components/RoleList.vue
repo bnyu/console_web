@@ -12,7 +12,7 @@
                 <span v-loading="s.row.loading">
                     <el-tag v-for="item in s.row.permit_list" :key="item" class="permit-tag"
                             disable-transitions>
-                        {{$t('app.permit.'+item)}}
+                        {{$t('permit.'+item)}}
                     </el-tag>
                 </span>
             </template>

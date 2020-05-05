@@ -28,7 +28,6 @@
 
 <script>
     import api from '@/api/modules/manager'
-    import Err from '@/assets/error_code'
 
     export default {
         name: "AddNewUser",
@@ -96,8 +95,6 @@
                 }).catch(({error, code}) => {
                     if (error) {
                         callback(new Error(this.$t('app.notice.someError')))
-                    } else if (code === Err.BaseErrorCode.UserDeleted) {
-                        callback(new Error(this.$t('app.notice.userAlreadyDelete')))
                     } else {
                         callback()
                     }

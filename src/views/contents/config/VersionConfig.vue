@@ -1,5 +1,5 @@
 <template>
-  <ContentLayout :title="'app.menu.configVersion'"></ContentLayout>
+  <ContentLayout :title="'menu.configVersion'"></ContentLayout>
 </template>
 
 <script>

@@ -1,6 +1,5 @@
 import http from '@/api/axios'
 import Cookies from 'js-cookie'
-import menus from '@/assets/menu'
 import getMenusAndRoutes from '@/router/menus'
 
 const state = {
@@ -44,24 +43,27 @@ const mutations = {
         state.username = ''
         state.token = ''
         state.permitList = []
-        state.menuList = getMenusAndRoutes([], [])
+        state.menuList = getMenusAndRoutes()
         state.menus = {}
         http.defaults.headers.common['X-Token'] = ''
-        Cookies.remove('u-name')
         Cookies.remove('x-token')
+        Cookies.remove('u-name')
     },
     login: (state, {uid, username, token, permitList}) => {
+        if (username === 'root') {
+            permitList.push('root')
+        }
         state.uid = uid
         state.username = username
         state.token = token
         state.permitList = permitList
-        state.menuList = getMenusAndRoutes(menus, permitList)
+        state.menuList = getMenusAndRoutes(permitList)
         for (let menu of state.menuList) {
             state.menus[menu.path] = menu
         }
         http.defaults.headers.common['X-Token'] = token
-        Cookies.set('u-name', username, {expires: 1})
         Cookies.set('x-token', token, {expires: 1})
+        Cookies.set('u-name', username, {expires: 1})
     },
 }
 

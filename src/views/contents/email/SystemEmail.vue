@@ -1,5 +1,5 @@
 <template>
-    <ContentLayout :title="'app.menu.email'"></ContentLayout>
+    <ContentLayout :title="'menu.email'"></ContentLayout>
 </template>
 
 <script>

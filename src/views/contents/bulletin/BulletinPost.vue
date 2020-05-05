@@ -1,5 +1,5 @@
 <template>
-    <ContentLayout :title="'app.menu.bulletinPost'"></ContentLayout>
+    <ContentLayout :title="'menu.bulletinPost'"></ContentLayout>
 </template>
 
 <script>

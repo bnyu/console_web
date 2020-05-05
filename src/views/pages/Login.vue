@@ -40,7 +40,6 @@
 
 <script>
     import api from '@/api/modules/user'
-    import Err from '@/assets/error_code'
 
     export default {
         name: 'Login',
@@ -75,7 +74,7 @@
                         this.$router.replace('/').then()
                     }
                 }).catch(({code, err}) => {
-                    if (code === Err.BaseErrorCode.WrongPassword) {
+                    if (code) {
                         this.$message({
                             message: this.$t('app.notice.wrongPassword'),
                             type: 'error',
@@ -84,12 +83,6 @@
                     } else if (err) {
                         this.$message({
                             message: this.$t('app.notice.networkError'),
-                            type: 'error',
-                            duration: 2000,
-                        })
-                    } else {
-                        this.$message({
-                            message: this.$t('app.notice.serverError'),
                             type: 'error',
                             duration: 2000,
                         })

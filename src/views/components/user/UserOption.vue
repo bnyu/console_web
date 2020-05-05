@@ -5,7 +5,7 @@
                 <slot></slot>
             </span>
             <el-dropdown-menu slot="dropdown">
-                <el-dropdown-item command="manager">
+                <el-dropdown-item command="manager" v-if="root">
                     <span>{{$t('app.user.manage')}}</span>
                 </el-dropdown-item>
                 <el-dropdown-item command="user">
@@ -36,6 +36,9 @@
 
     export default {
         name: "UserOption",
+        props: {
+          root: Boolean
+        },
         data() {
             return {
                 loading: false,
@@ -53,12 +56,11 @@
             handleLogout() {
                 this.loading = true
                 api.logout().then(() => {
-                        this.$store.commit('user/logout')
-                        this.$router.push('/').then()
-                    }
-                ).catch(() => {
-                    this.$store.commit('user/logout')
-                    this.$router.push('/').then()
+                  this.$store.commit('user/logout')
+                  this.$router.replace('/login').then()
+                }).catch(() => {
+                  this.$store.commit('user/logout')
+                  this.$router.replace('/login').then()
                 })
             }
         }

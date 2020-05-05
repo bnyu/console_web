@@ -28,7 +28,7 @@
                         <LangSelector><i class="material-icons">translate</i></LangSelector>
                     </span>
                     <span>
-                        <UserOption><span class="username">{{username}}</span></UserOption>
+                        <UserOption v-bind:root="username==='root'"><span class="username">{{username}}</span></UserOption>
                     </span>
                 </div>
             </el-header>

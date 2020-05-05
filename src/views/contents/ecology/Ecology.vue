@@ -1,5 +1,5 @@
 <template>
-    <ContentLayout :title="'app.menu.ecology'"></ContentLayout>
+    <ContentLayout :title="'menu.ecology'"></ContentLayout>
 </template>
 
 <script>

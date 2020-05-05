@@ -1,5 +1,4 @@
 import http from './axios.js'
-import Err from '@/assets/error_code'
 import v from '@/main'
 
 http.defaults.baseURL = process.env.VUE_APP_API_URL
@@ -12,15 +11,6 @@ export default function (config) {
                 if (resolve) {
                     resolve(resp.data)
                 }
-            } else if (resp.code === Err.BaseErrorCode.LoginExpired) {
-                v.$store.commit('user/logout')
-                v.$router.push('/login').then(() => {
-                    v.$message({
-                        message: v.$t('app.notice.loginExpired'),
-                        type: 'warning',
-                        duration: 1000,
-                    })
-                })
             } else {
                 if (reject) {
                     reject({code: resp.code, msg: resp.msg})
@@ -31,6 +21,8 @@ export default function (config) {
                         duration: 1000,
                     })
                 }
+                // v.$store.commit('user/logout')
+                // v.$router.push('/login')
             }
         }).catch(err => {
             if (reject) {

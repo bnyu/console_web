@@ -1,11 +1,17 @@
 import router from './index'
 import newRouter from './router'
 import {login, base, temp, content, last} from './routes'
+import menuList from './menu_list/index'
 
-const getMenusAndRoutes = (menuList, permitList) => {
+const getMenusAndRoutes = (permitList) => {
     let ps = {}
-    for (let i = 0; i < permitList.length; i++) {
-        ps[permitList[i].toLowerCase()] = true
+    let quit = false
+    if (permitList) {
+        for (let i = 0; i < permitList.length; i++) {
+            ps[permitList[i].toLowerCase()] = true
+        }
+    } else {
+        quit = true
     }
 
     let menuRouterList = []
@@ -44,6 +50,11 @@ const getMenusAndRoutes = (menuList, permitList) => {
         } else {
             router.matcher = newRouter([base, login, last]).matcher
         }
+    }
+
+    if (quit) {
+        updateRouter([])
+        return []
     }
 
     const myMenuList = menuList.map(m => f('', m)).filter(m => m)

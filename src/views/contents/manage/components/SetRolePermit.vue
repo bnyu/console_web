@@ -7,7 +7,7 @@
         <el-form-item :label="$t('app.user.permitList')" class="m-add-input">
             <el-checkbox-group v-model="checkedList" size="small" class="permit-list">
                 <el-checkbox v-for="item in permitList" :key="item" :label="item" border class="permit-key">
-                    {{$t('app.permit.'+item)}}
+                    {{$t('permit.'+item)}}
                 </el-checkbox>
             </el-checkbox-group>
         </el-form-item>
@@ -23,7 +23,7 @@
 
 <script>
     import api from '@/api/modules/manager'
-    import permit_key from '@/assets/permit_key'
+    import permitList from '@/router/permit_list/index'
 
     export default {
         name: "SetRolePermit",
@@ -37,7 +37,7 @@
             return {
                 loading: false,
                 name: '',
-                permitList: permit_key,
+                permitList: permitList,
                 checkedList: []
             }
         },

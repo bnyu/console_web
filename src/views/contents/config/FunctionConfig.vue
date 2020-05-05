@@ -1,5 +1,5 @@
 <template>
-  <ContentLayout :title="'app.menu.configFunction'"></ContentLayout>
+  <ContentLayout :title="'menu.configFunction'"></ContentLayout>
 </template>
 
 <script>
