@@ -1,15 +1,13 @@
 <template>
-    <ContentLayout :title="'app.menu.dashboard'"></ContentLayout>
+  <ContentLayout :title="'app.menu.dashboard'"></ContentLayout>
 </template>
 
 <script>
-import ContentLayout from "@/views/layouts/ContentLayout"
+import ContentLayout from "@/views/layouts/ContentLayout";
 export default {
-  name: 'Dashboard',
-    components: {ContentLayout}
-}
+  name: "Dashboard",
+  components: { ContentLayout },
+};
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>

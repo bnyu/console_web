@@ -1,40 +1,40 @@
-import Content from "@/views/pages/Content"
-import Fallback from '@/views/pages/Fallback'
-import Landing from "@/views/pages/Landing"
-import Login from "@/views/pages/Login"
-import Dashboard from "@/views/contents/Dashboard"
+import Content from "@/views/pages/Content";
+import Fallback from "@/views/pages/Fallback";
+import Landing from "@/views/pages/Landing";
+import Login from "@/views/pages/Login";
+import Dashboard from "@/views/contents/Dashboard";
 
 const base = {
-    path: '/',
-    component: Landing
-}
+  path: "/",
+  component: Landing,
+};
 
 const login = {
-    path: '/login',
-    component: Login
-}
+  path: "/login",
+  component: Login,
+};
 
 /* avoid override by content */
 const temp = {
-    path: '/temp',
-    component: Fallback
-}
+  path: "/temp",
+  component: Fallback,
+};
 
 const content = {
-    path: '/',
-    component: Content,
-    redirect: 'dashboard',
-    children: [
-        {
-            path: 'dashboard',
-            component: Dashboard,
-        }
-    ]
-}
+  path: "/",
+  component: Content,
+  redirect: "dashboard",
+  children: [
+    {
+      path: "dashboard",
+      component: Dashboard,
+    },
+  ],
+};
 
 const last = {
-    path: '*',
-    component: Fallback
-}
+  path: "*",
+  component: Fallback,
+};
 
-export {base, login, temp, content, last}
+export { base, login, temp, content, last };
