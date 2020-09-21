@@ -1,12 +1,12 @@
-import Vue from 'vue'
-import axios from 'axios'
+import Vue from "vue";
+import axios from "axios";
 
 const axiosInstance = axios.create({
-    baseURL: process.env.VUE_APP_API_URL,
-    timeout: 10000,
-})
+  baseURL: process.env.VUE_APP_API_URL,
+  timeout: 10000,
+});
 
-Vue.prototype.$axios = axiosInstance
+Vue.prototype.$axios = axiosInstance;
 
 // axiosInstance.interceptors.request.use(
 //   config => {
@@ -18,16 +18,18 @@ Vue.prototype.$axios = axiosInstance
 // )
 
 axiosInstance.interceptors.response.use(
-    response => {
-        if (response.status === 200 && response.data) {
-            return response.data
-        } else {
-            return Promise.reject({error: new Error(response.statusText || 'error request')})
-        }
-    },
-    error => {
-        return Promise.reject({error})
+  (response) => {
+    if (response.status === 200 && response.data) {
+      return response.data;
+    } else {
+      return Promise.reject({
+        error: new Error(response.statusText || "error request"),
+      });
     }
-)
+  },
+  (error) => {
+    return Promise.reject({ error });
+  }
+);
 
-export default axiosInstance
+export default axiosInstance;

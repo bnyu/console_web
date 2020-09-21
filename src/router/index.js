@@ -1,6 +1,6 @@
-import {base, login, last} from './routes'
-import newRouter from './router'
+import { base, login, last } from "./routes";
+import newRouter from "./router";
 
-const router = newRouter([base, login, last])
+const router = newRouter([base, login, last]);
 
-export default router
+export default router;

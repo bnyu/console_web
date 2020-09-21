@@ -45,7 +45,11 @@
       "eslint:recommended",
       "@vue/prettier"
     ],
-    "rules": {},
+    "rules": {
+      "prettier/prettier": [
+        "warn"
+      ]
+    },
     "parserOptions": {
       "parser": "babel-eslint"
     }
