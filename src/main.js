@@ -8,6 +8,7 @@ import ElementUI from 'element-ui'
 import 'normalize.css/normalize.css' // a modern alternative to css resets
 import './css/element-variables.scss' // element-ui css theme
 import './css/iconfont.css' // material icon
+import './mock/mock.js' //mock.js
 
 Vue.use(ElementUI, i18n)
 

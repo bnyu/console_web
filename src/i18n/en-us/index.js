@@ -1,9 +1,7 @@
 import elementEnLocale from 'element-ui/lib/locale/lang/en' // element-ui lang
-import content from "./content"
 
 export default {
     ...elementEnLocale,
-    ...content,
     app: {
         title: 'Console Web',
         menu: {

@@ -1,4 +1,3 @@
-import content from './content'
 
 const manage = {
     hidden: true,
@@ -62,4 +61,4 @@ const user = {
     ]
 }
 
-export default [...content, manage, user]
+export default [manage, user]

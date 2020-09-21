@@ -1,9 +1,7 @@
 import elementCnLocale from 'element-ui/lib/locale/lang/zh-CN'// element-ui lang
-import content from "./content"
 
 export default {
     ...elementCnLocale,
-    ...content,
     app: {
         title: '控制台',
         menu: {
