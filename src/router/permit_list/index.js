@@ -1,3 +1,1 @@
-import content from "./content";
-
-export default [...content, "root"];
+export default ["root"];

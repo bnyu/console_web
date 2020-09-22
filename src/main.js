@@ -10,7 +10,11 @@ import "./css/element-variables.scss"; // element-ui css theme
 import "./css/iconfont.css"; // material icon
 import "./mock/mock.js"; //mock.js
 
+import ContentLayout from "./views/layouts/ContentLayout";
+
 Vue.use(ElementUI, i18n);
+
+Vue.component(ContentLayout.name, ContentLayout);
 
 Vue.config.productionTip = false;
 

@@ -1,5 +1,5 @@
 <template>
-  <ContentLayout :title="'app.menu.userList'">
+  <content-layout :title="'app.menu.userList'">
     <template #title>
       <el-button type="text" class="add-button" @click="toAddPage">
         {{ $t("app.act.addNew") }}
@@ -12,18 +12,17 @@
       :total="total"
       @turn-page="turnPage"
     ></Pager>
-  </ContentLayout>
+  </content-layout>
 </template>
 
 <script>
 import api from "@/api/modules/manager";
-import ContentLayout from "@/views/layouts/ContentLayout";
 import UserList from "./components/UserList";
 import Pager from "./components/Pager";
 
 export default {
   name: "UserManage",
-  components: { ContentLayout, Pager, UserList },
+  components: { Pager, UserList },
   data() {
     return {
       pageSize: 10,

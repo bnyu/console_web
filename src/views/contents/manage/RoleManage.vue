@@ -1,5 +1,5 @@
 <template>
-  <ContentLayout :title="'app.menu.roleList'">
+  <content-layout :title="'app.menu.roleList'">
     <template #title>
       <el-button type="text" class="add-button" @click="toAddPage">
         {{ $t("app.act.addNew") }}
@@ -12,18 +12,17 @@
       :total="total"
       @turn-page="turnPage"
     ></Pager>
-  </ContentLayout>
+  </content-layout>
 </template>
 
 <script>
 import api from "@/api/modules/manager";
-import ContentLayout from "@/views/layouts/ContentLayout";
 import RoleList from "./components/RoleList";
 import Pager from "./components/Pager";
 
 export default {
   name: "roleManage",
-  components: { Pager, RoleList, ContentLayout },
+  components: { Pager, RoleList },
   data() {
     return {
       pageSize: 10,

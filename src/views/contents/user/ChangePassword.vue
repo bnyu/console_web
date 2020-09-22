@@ -1,5 +1,5 @@
 <template>
-  <ContentLayout v-bind:title="'app.menu.changePassword'">
+  <content-layout v-bind:title="'app.menu.changePassword'">
     <el-form
       label-position="right"
       label-width="80px"
@@ -52,16 +52,14 @@
         }}</el-button>
       </el-form-item>
     </el-form>
-  </ContentLayout>
+  </content-layout>
 </template>
 
 <script>
 import api from "@/api/modules/user";
-import ContentLayout from "@/views/layouts/ContentLayout";
 
 export default {
   name: "ChangePassword",
-  components: { ContentLayout },
   data() {
     const validatePass1 = (rule, value, callback) => {
       if (value === "") {

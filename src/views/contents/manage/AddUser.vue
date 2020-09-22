@@ -1,15 +1,14 @@
 <template>
-  <ContentLayout :title="'app.menu.userAdd'">
+  <content-layout :title="'app.menu.userAdd'">
     <AddNewUser></AddNewUser>
-  </ContentLayout>
+  </content-layout>
 </template>
 
 <script>
-import ContentLayout from "@/views/layouts/ContentLayout";
 import AddNewUser from "./components/AddNewUser";
 export default {
   name: "AddUser",
-  components: { AddNewUser, ContentLayout },
+  components: { AddNewUser },
 };
 </script>
 
