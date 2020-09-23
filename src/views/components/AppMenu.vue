@@ -2,13 +2,13 @@
   <div v-if="menus">
     <el-menu
       class="app-menu-bar"
-      :default-active="path"
+      :default-active="name"
       @select="handelRoute"
       background-color="#eeeeee"
     >
-      <MenuItem
+      <MenuBar
         v-for="(item, index) in menus"
-        :key="item.path"
+        :key="item.name"
         v-bind:menu="item"
         v-bind:level="0"
         v-bind:index="index"
@@ -18,23 +18,23 @@
 </template>
 
 <script>
-import MenuItem from "@/views/components/MenuItem";
+import MenuBar from "@/views/components/MenuBar";
 
 export default {
   name: "AppMenu",
-  components: { MenuItem },
+  components: { MenuBar },
   props: {
     menus: Array[Object],
   },
   computed: {
-    path() {
-      return this.$route.path;
+    name() {
+      return this.$route.name;
     },
   },
   methods: {
-    handelRoute(index) {
-      if (this.path !== index) {
-        this.$router.push(index).then();
+    handelRoute(name) {
+      if (this.name !== name) {
+        this.$router.push({ name: name }).then();
       }
     },
   },
