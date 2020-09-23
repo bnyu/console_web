@@ -12,7 +12,7 @@
 
 <script>
 export default {
-  name: "ContentLayout",
+  name: "content-layout",
   props: {
     title: String,
   },

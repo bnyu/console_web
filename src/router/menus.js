@@ -1,6 +1,6 @@
 import router from "./index";
 import newRouter from "./router";
-import { login, base, temp, content, last } from "./routes";
+import { login, base, content, fallback, landing } from "./routes";
 import menuList from "./menu_list/index";
 
 const getMenusAndRoutes = (permitList) => {
@@ -56,9 +56,10 @@ const getMenusAndRoutes = (permitList) => {
     if (contentRoutes.length > 0) {
       router.matcher = newRouter([]).matcher;
       const children = [...content.children, ...contentRoutes];
-      router.addRoutes([temp, { ...content, children }, last]);
+      const contents = { ...content, children };
+      router.addRoutes([contents, fallback]);
     } else {
-      router.matcher = newRouter([base, login, last]).matcher;
+      router.matcher = newRouter([base, login, landing]).matcher;
     }
   };
 

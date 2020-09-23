@@ -1,10 +1,10 @@
 <template>
-  <content-layout :title="'app.menu.dashboard'"></content-layout>
+  <content-layout :title="'menu.newNote'"></content-layout>
 </template>
 
 <script>
 export default {
-  name: "Dashboard",
+  name: "NewNote",
 };
 </script>
 

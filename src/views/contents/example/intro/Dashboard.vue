@@ -1,5 +1,5 @@
 <template>
-  <content-layout :title="'app.menu.dashboard'"></content-layout>
+  <content-layout :title="'menu.dashboard'"></content-layout>
 </template>
 
 <script>

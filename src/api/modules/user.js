@@ -16,11 +16,11 @@ export default {
     });
   },
 
-  getInfo(token) {
+  reLogin(username, token) {
     return request({
-      method: "GET",
-      url: "/info",
-      headers: { "X-Token": token },
+      method: "POST",
+      url: "/re_login",
+      data: { username, token },
       timeout: 5000,
     });
   },

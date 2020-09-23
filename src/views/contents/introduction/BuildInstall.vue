@@ -1,10 +1,10 @@
 <template>
-  <content-layout :title="'app.menu.dashboard'"></content-layout>
+  <content-layout :title="'menu.install'"></content-layout>
 </template>
 
 <script>
 export default {
-  name: "Dashboard",
+  name: "BuildInstall",
 };
 </script>
 

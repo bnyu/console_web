@@ -14,27 +14,25 @@ const login = {
   component: Login,
 };
 
-/* avoid override by content */
-const temp = {
-  path: "/temp",
-  component: Fallback,
-};
-
 const content = {
   path: "/",
   component: Content,
-  redirect: "dashboard",
   children: [
     {
-      path: "dashboard",
+      path: "",
       component: Dashboard,
     },
   ],
 };
 
-const last = {
+const fallback = {
   path: "*",
   component: Fallback,
 };
 
-export { base, login, temp, content, last };
+const landing = {
+  path: "*",
+  component: Landing,
+};
+
+export { base, login, content, fallback, landing };
