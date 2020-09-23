@@ -13,12 +13,15 @@
             </span>
           </span>
           <span class="app-nav" v-show="!navHidden">
-            <span v-for="item in menuList" :key="item.path">
+            <span
+              v-for="item in menuList"
+              :key="item.path"
+              class="app-nav-item"
+            >
               <span
                 v-if="!item.hidden"
                 :class="{ active: item.path === menuPath1 }"
               >
-                &nbsp;&nbsp;&nbsp;&nbsp;
                 <span @click="() => onClickNav(item.path)" class="app-nav-link">
                   {{ $t(item.name) }}
                 </span>
@@ -28,11 +31,18 @@
         </div>
         <div class="app-header-side header-right">
           <span>
-            <LangSelector><i class="material-icons">translate</i></LangSelector>
+            <LangSelector
+              ><i class="material-icons translate-icon"
+                >translate</i
+              ></LangSelector
+            >
           </span>
           <span>
-            <UserOption v-bind:root="username === 'root'"
-              ><span class="username">{{ username }}</span></UserOption
+            <UserOption
+              ><span class="username">{{ username }}</span>
+              <span class="material-icons username"
+                >expand_more</span
+              ></UserOption
             >
           </span>
         </div>
@@ -59,7 +69,7 @@
 <script>
 import AppMenu from "@/views/components/AppMenu";
 import LangSelector from "@/views/components/LangSelector";
-import UserOption from "@/views/components/user/UserOption";
+import UserOption from "@/views/components/UserOption";
 
 export default {
   name: "AppLayout",
@@ -101,8 +111,8 @@ export default {
   },
   methods: {
     onClickTitle() {
-      if (this.$route.path !== "/dashboard") {
-        this.$router.push("/dashboard").then();
+      if (this.$route.path !== "/") {
+        this.$router.push("/").then();
       }
     },
     onClickNav(menuPath1) {
@@ -146,7 +156,7 @@ export default {
 
 <style scoped lang="scss">
 $aside-width: 240px;
-$header-height: 60px;
+$header-height: 45px;
 
 .app {
   &-header {
@@ -162,6 +172,10 @@ $header-height: 60px;
     z-index: 100;
 
     .app-nav {
+      &-item {
+        margin-right: 25px;
+      }
+
       &-link {
         color: rgba(255, 255, 255, 0.88);
         cursor: pointer;
@@ -188,9 +202,10 @@ $header-height: 60px;
     }
 
     .app-title {
-      max-width: 180px;
-      padding-left: 24px;
-      padding-right: 60px;
+      min-width: 170px;
+      max-width: 230px;
+      margin-left: 24px;
+      margin-right: 24px;
 
       &-text {
         color: white;
@@ -209,7 +224,14 @@ $header-height: 60px;
 
     .username {
       color: white;
-      font-size: 16px;
+      font-size: 18px;
+    }
+
+    .translate-icon {
+      color: white;
+      font-size: 18px;
+      margin-top: 5px;
+      margin-right: 8px;
     }
   }
 

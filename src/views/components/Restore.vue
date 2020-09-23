@@ -1,6 +1,6 @@
 <template>
   <div class="cc">
-    <span v-loading="true" class="cc-t"> {{ $t("app.act.loading") }}... </span>
+    <span class="cc-t"> {{ $t("app.act.loading") }}... </span>
   </div>
 </template>
 
@@ -9,12 +9,11 @@ import api from "@/api/modules/user";
 
 export default {
   name: "Restore",
-  props: {
-    path: String,
-  },
   data() {
     return {
-      enterPath: this.path,
+      temp: "/temp",
+      path: this.$route.path,
+      fullPath: this.$route.fullPath,
       uid: this.$store.getters["user/uid"],
       username: this.$store.getters["user/username"],
       token: this.$store.getters["user/token"],
@@ -22,16 +21,18 @@ export default {
   },
   methods: {
     toLoginPage() {
-      if (this.enterPath !== "/login") {
-        this.$router
-          .push({ path: "/login", query: { from: this.enterPath } })
-          .then();
+      let query = {};
+      if (this.path && this.path !== "/" && this.path !== this.temp) {
+        query.from = this.fullPath;
       }
+      this.$router.replace({ path: "/login", query: query }).then();
     },
     backPage() {
-      const temp = "/temp";
-      const enterPath = this.enterPath;
-      if (enterPath && enterPath !== temp) {
+      const temp = this.temp;
+      const enterPath = this.fullPath;
+      if (enterPath !== temp) {
+        //same router path but different component
+        //go temp then back for refresh
         this.$router.replace(temp).then(() => {
           this.$router.replace(enterPath).then();
         });
@@ -60,6 +61,7 @@ export default {
   },
   created() {
     if (
+      this.path !== this.temp &&
       this.uid === 0 &&
       this.username &&
       this.username.length > 0 &&

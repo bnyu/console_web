@@ -1,7 +1,5 @@
 <template>
-  <div class="cc">
-    <Restore v-bind:path="'/'" />
-  </div>
+  <Restore />
 </template>
 
 <script>
@@ -12,9 +10,3 @@ export default {
   components: { Restore },
 };
 </script>
-
-<style scoped lang="scss">
-.cc {
-  background-color: $second-0;
-}
-</style>

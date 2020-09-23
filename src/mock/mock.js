@@ -7,10 +7,19 @@ function login() {
     data: {
       uid: 1,
       token: "xxx",
-      permits: ["root"],
+      permits: [
+        "root",
+        "dashboard",
+        "bookmark",
+        "mail",
+        "new_note",
+        "view_note",
+      ],
     },
   };
 }
+
+Mock.setup({ timeout: "200-600" });
 
 Mock.mock("http://mock.js/login", "post", login);
 Mock.mock("http://mock.js/logout", "post", {

@@ -5,9 +5,6 @@
         <slot></slot>
       </span>
       <el-dropdown-menu slot="dropdown">
-        <el-dropdown-item command="manager" v-if="root">
-          <span>{{ $t("app.user.manage") }}</span>
-        </el-dropdown-item>
         <el-dropdown-item command="user">
           <span>{{ $t("app.user.info") }}</span>
         </el-dropdown-item>
@@ -40,9 +37,6 @@ import api from "@/api/modules/user";
 
 export default {
   name: "UserOption",
-  props: {
-    root: Boolean,
-  },
   data() {
     return {
       loading: false,

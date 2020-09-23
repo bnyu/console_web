@@ -1,5 +1,5 @@
 <template>
-  <div class="cc">
+  <div v-if="path !== temp" class="cc">
     <div class="cc-t">{{ $t("app.err404") }}</div>
     <div>
       <router-link to="/">{{ $t("app.act.back") }}</router-link>
@@ -10,6 +10,16 @@
 <script>
 export default {
   name: "Error404",
+  data() {
+    return {
+      temp: "/temp",
+    };
+  },
+  computed: {
+    path() {
+      return this.$route.path;
+    },
+  },
 };
 </script>
 
