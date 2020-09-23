@@ -42,7 +42,7 @@ export default {
     },
     getInfo() {
       api
-        .getInfo(this.token)
+        .reLogin(this.username, this.token)
         .then((data) => {
           const permitList = data.permits;
           const uid = data.uid;

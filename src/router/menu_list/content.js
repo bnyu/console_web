@@ -66,6 +66,7 @@ const example = {
         {
           name: "menu.eat.rice",
           path: "rice",
+          permit: "rice",
           component: "example/food/Rice.vue",
         },
         {
@@ -80,6 +81,7 @@ const example = {
             {
               name: "menu.eat.celery",
               path: "celery",
+              permit: "celery",
               component: "example/food/Celery.vue",
             },
           ],
@@ -105,11 +107,13 @@ const example = {
                 {
                   name: "menu.eat.mandarinOrange",
                   path: "mandarin",
+                  permit: "orange",
                   component: "example/food/MandarinOrange.vue",
                 },
                 {
                   name: "menu.eat.sweetOrange",
                   path: "sweet",
+                  permit: "orange",
                   component: "example/food/SweetOrange.vue",
                 },
               ],
@@ -123,11 +127,13 @@ const example = {
             {
               name: "menu.eat.peanut",
               path: "peanut",
+              permit: "peanut",
               component: "example/food/Peanut.vue",
             },
             {
               name: "menu.eat.walnut",
               path: "walnut",
+              permit: "walnut",
               component: "example/food/Walnut.vue",
             },
           ],
@@ -156,14 +162,14 @@ const introduction = {
           name: "menu.install",
           icon: "get_app",
           path: "install",
-          permit: "root",
+          permit: "build",
           component: "introduction/BuildInstall.vue",
         },
         {
           name: "menu.apply",
           icon: "settings",
           path: "apply",
-          permit: "root",
+          permit: "build",
           component: "introduction/BuildApply.vue",
         },
       ],

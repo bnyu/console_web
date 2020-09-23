@@ -280,6 +280,7 @@ $header-height: 45px;
       display: flex;
       flex-direction: column;
       justify-content: flex-start;
+      padding-bottom: 24px;
     }
   }
 
