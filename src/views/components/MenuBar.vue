@@ -1,7 +1,7 @@
 <template>
   <div v-if="menu && !menu.hidden" class="app-menu">
     <el-divider v-if="level === 0 && index !== 0"></el-divider>
-    <el-submenu v-if="menu.children" :index="menu.path">
+    <el-submenu v-if="menu.children" :index="menu.name">
       <template slot="title">
         <span class="menu-title submenu-title" :style="styleHeight">
           <span>
@@ -15,15 +15,15 @@
           >
         </span>
       </template>
-      <MenuItem
+      <MenuBar
         v-for="(item, index) in menu.children"
-        :key="item.path"
+        :key="item.name"
         v-bind:menu="item"
         v-bind:level="level + 1"
         v-bind:index="index"
       />
     </el-submenu>
-    <el-menu-item v-else :index="menu.path">
+    <el-menu-item v-else :index="menu.name">
       <template slot="title">
         <span class="menu-title" :style="styleHeight">
           <i class="menu-icon material-icons" :style="stylePadding">{{
@@ -38,7 +38,7 @@
 
 <script>
 export default {
-  name: "MenuItem",
+  name: "MenuBar",
   props: {
     index: Number,
     menu: Object,
