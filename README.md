@@ -1,29 +1,34 @@
-# console_web
+# Console Web Framework
 
-## Project setup
-```
-yarn install
-```
+[中文文档](./README_zh.md)
 
-### Compiles and hot-reloads for development
-```
-yarn run serve
-```
+Based on [Vue](https://github.com/vuejs/vue)
 
-### Compiles and minifies for production
-```
-yarn run build
-```
+## Usage
 
-### Run your tests
-```
-yarn run test
-```
+1. Git clone `git clone https://github.com/bnyu/console_web.git`
+2. Install [Yarn](https://yarnpkg.com/getting-started/install) or just use [Npm](https://www.npmjs.com/)
+3. Run `yarn install` or `npm install` in the directory you cloned to install dependencies
+4. Write your code and Developed with `yarn run serve` or `npm run serve`
+5. Build with `yarn run build` or `npm run build`
 
-### Lints and fixes files
-```
-yarn run lint
-```
+### Example
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+Under the mock, there are some users defined with different permits, you can try login and see the efforts.
+
+| Username    | Password    |
+| ----------- | ----------- |
+| root        | 123456      |
+| p1          | 123456      |
+| p2          | 123456      |
+| p3          | 123456      |
+| p4          | 123456      |
+
+![DemoScreenshot](./doc/assets/screenshot.png)
+
+You need a server to deal with login and other request in production environment, but you can use mock for the
+development.
+
+## License
+
+This is licensed under the Apache License, Version 2.0. See [License](LICENSE) for the full license text.

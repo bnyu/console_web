@@ -37,24 +37,60 @@ function login({ body }) {
     return resp;
   }
   let data = {
-    uid: 1,
-    token: "xxx",
+    uid: 0,
+    token: "",
     permits: [],
   };
-  resp.data = data;
   if (req.username === "root") {
-    data.permits = root;
+    let t = "root-temp-token";
+    if (req.token === t || req.password === "123456") {
+      data.uid = 1;
+      data.token = t;
+      data.permits = root;
+    }
   } else if (req.username === "p1") {
-    data.permits = p1;
+    let t = "p1-temp-token";
+    if (req.token === t || req.password === "123456") {
+      data.uid = 2;
+      data.token = t;
+      data.permits = p1;
+    }
   } else if (req.username === "p2") {
-    data.permits = p2;
+    let t = "p2-temp-token";
+    if (req.token === t || req.password === "123456") {
+      data.uid = 3;
+      data.token = t;
+      data.permits = p2;
+    }
   } else if (req.username === "p3") {
-    data.permits = p3;
+    let t = "p3-temp-token";
+    if (req.token === t || req.password === "123456") {
+      data.uid = 4;
+      data.token = t;
+      data.permits = p3;
+    }
   } else if (req.username === "p4") {
-    data.permits = p4;
+    let t = "p4-temp-token";
+    if (req.token === t || req.password === "123456") {
+      data.uid = 5;
+      data.token = t;
+      data.permits = p4;
+    }
+  } else if (req.username === "pr") {
+    let t = "random-temp-token";
+    let pr = randomPermits.filter(() => Math.random() > 0.6);
+    data.permits = [...normalPermits, ...pr];
+    if (req.token === t || req.password === "123456") {
+      data.uid = 6;
+      data.token = t;
+      data.permits = pr;
+    }
+  }
+  if (data.uid > 0) {
+    resp.data = data;
   } else {
-    let r = randomPermits.filter(() => Math.random() > 0.8);
-    data.permits = [...normalPermits, ...r];
+    resp.code = 2;
+    resp.msg = "wrong username or password";
   }
   return resp;
 }
