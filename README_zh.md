@@ -12,9 +12,52 @@
 4. 在此框架下编写你自己的代码, 同时使用 `yarn run serve` 或 `npm run serve` 查看效果
 5. 将你的应用打包 `yarn run build` or `npm run build`
 
+### 开发
+
+快速开始:  
+你只需要在 `src/views/contents` 文件夹里添加你想要的视图, 类似里面已有的一些示例.  
+然后编辑 `src/router/menu_list/content.js` 文件管理视图结构. 根据登录用户的权限, 会自动生成路由以及目录.
+
+```javascript
+let demo = [
+  {
+    name: "menu.dashboard", // 目录名称的本地化key
+    icon: "dashboard",      // 目录图标的key
+    path: "dashboard",      // URL相对路径
+    // permit: "dashboard", // 如果需要的权限key 
+    component: "example/intro/Dashboard.vue", // vue视图文件在contents文件夹中的相对路径
+    // children: []  // 如果有子节点, 则是没有视图的父节点, 如下
+  },
+  {
+    name: "menu.notes",
+    icon: "event_note",
+    path: "note",
+    children: [
+      {
+        name: "menu.newNote",
+        icon: "note_add",
+        path: "new",
+        permit: "new_note",
+        component: "example/note/NewNote.vue",
+      },
+      {
+        name: "menu.viewNote",
+        icon: "notes",
+        path: "view",
+        permit: "view_note",
+        component: "example/note/ViewNote.vue",
+      },
+    ],
+  },
+]
+```
+
+> 同时, 你可以根据需求自己定制此框架, 例如修改样式等等.
+> 文件 `src/views/layouts/ContentLayout.vue` 提供了一种通用方式来统一内容样式风格, 你可以定制化修改.
+
 ### 示例
 
-在mock文件夹下伪造了一些有着不同权限的用户. 你可以尝试登录他们, 查看效果.
+在 `src/mock` 文件夹下伪造了一些有着不同权限的用户. 你可以尝试登录他们, 查看效果.
 
 | 用户名       |  密码        |
 | ----------- | ----------- |
